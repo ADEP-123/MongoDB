@@ -583,7 +583,7 @@ db.sucursal.aggregate([
 ]);
 // 1.Obtener todos los clientes
 use("db_campus_alquiler");
-db.cliente.find({}, { "ID_Cliente": 1, "Nombre": 1, "Apellido": 1, "_id": 0 })
+db.cliente.find({}, { ID: "$ID_Cliente", Name: "$Nombre", LastName: "$Apellido", "_id": 0 })
 
 // 2. Obtener todos los automoviles disponibles para alquiler
 use("db_campus_alquiler");
@@ -657,9 +657,11 @@ db.alquiler.aggregate([
     {
         $project: {
             "_id": 0,
-            "cliente_info.DNI": 1,
-            "cliente_info.Nombre": 1,
-            "cliente_info.Apellido": 1,
+            "cliente_info": {
+                "Name": "$cliente_info.Nombre",
+                "Lastname": "$cliente_info.Apellido",
+                "Document": "$cliente_info.DNI"
+            },
             "alquileres": 1
         }
     }
@@ -694,20 +696,27 @@ db.reserva.aggregate([
     {
         $project: {
             "_id": 0,
-            "cliente_info.DNI": 1,
-            "cliente_info.Nombre": 1,
-            "cliente_info.Apellido": 1,
-            "automovil_info.Marca": 1,
-            "automovil_info.Modelo": 1,
-            "automovil_info.Anio": 1,
-            "ID_Alquiler": 1,
-            "Fecha_Inicio": 1,
-            "Fecha_Fin": 1,
-            "Estado": 1,
+            "reserva_info": {
+                "ID": "$ID_Reserva",
+                "Booking": "$Fecha_Reserva",
+                "Start": "$Fecha_Inicio",
+                "End": "$Fecha_Fin",
+                "Status": "$Estado"
+            },
+            "cliente_info": {
+                "Document": "$cliente_info.DNI",
+                "Name": "$cliente_info.Nombre",
+                "Lastname": "$cliente_info.Apellido"
+            },
+            "automovil_info": {
+                "Brand": "$automovil_info.Marca",
+                "Model": "$automovil_info.Modelo",
+                "Year": "$automovil_info.Anio"
+            }
         }
     }
 ]);
 
 // 5. Obtener los detalles del alquiler con el ID_Alquiler especifico
 use("db_campus_alquiler");
-db.alquiler.find({ ID_Alquiler: { $eq: 1 } }, {});
+db.alquiler.find({ ID_Alquiler: { $eq: 1 } }, { ID: "$ID_Alquiler", Client: "$cliente_id", Vehicle: "$automovil_id", Start: "$Fecha_Inicio", End: "$Fecha_Fin", Cost: "$Costo_Total", Status: "$Estado"});
