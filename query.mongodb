@@ -3,7 +3,6 @@ use("db_campus_alquiler");
 
 // Coleccion Sucursal
 db.createCollection("sucursal");
-
 db.sucursal.insertMany([
     {
         _id: 1,
@@ -52,7 +51,6 @@ db.sucursal.insertMany([
 
 // Coleccion automovil
 db.createCollection("automovil");
-
 db.automovil.insertMany([
     {
         _id: 1,
@@ -119,7 +117,6 @@ db.automovil.insertMany([
 
 // Coleccion sucursal_automovil
 db.createCollection("sucursal_automovil");
-
 db.sucursal_automovil.insertMany([
     {
         _id: 1,
@@ -162,7 +159,6 @@ db.sucursal_automovil.insertMany([
 
 // Coleccion cliente
 db.createCollection("cliente");
-
 db.cliente.insertMany([
     {
         _id: 1,
@@ -229,7 +225,6 @@ db.cliente.insertMany([
 
 // Coleccion reserva
 db.createCollection("reserva");
-
 db.reserva.insertMany([
     {
         _id: 1,
@@ -296,7 +291,6 @@ db.reserva.insertMany([
 
 // Coleccion alquiler
 db.createCollection("alquiler");
-
 db.alquiler.insertMany([
     {
         _id: 1,
@@ -479,7 +473,6 @@ db.empleado.insertMany([
 
 // Coleccion registro_entrega
 db.createCollection("registro_entrega");
-
 db.registro_entrega.insertMany([
     {
         _id: 1,
@@ -540,7 +533,6 @@ db.registro_entrega.insertMany([
 
 // Coleccion registro_devolucion
 db.createCollection("registro_devolucion");
-
 db.registro_devolucion.insertMany([
     {
         _id: 1,
@@ -605,7 +597,6 @@ db.registro_devolucion.insertMany([
 ]);
 
 
-
 // Consultas
 use("db_campus_alquiler");
 db.sucursal.aggregate([
@@ -631,6 +622,7 @@ db.sucursal.aggregate([
         }
     }
 ]);
+
 // 1.Obtener todos los clientes
 use("db_campus_alquiler");
 db.cliente.find({}, { ID: "$ID_Cliente", Name: "$Nombre", LastName: "$Apellido", "_id": 0 })
@@ -783,4 +775,39 @@ db.alquiler.find({ ID_Alquiler: { $eq: 1 } }, { ID: "$ID_Alquiler", Client: "$cl
 
 // 6. Listar los emppleados con el cargo de vendedor
 use("db_campus_alquiler");
-db.empleado.find({ Cargo: { $eq: "Vendedor" } }, { ID: "$ID_Empleado", Name: "$Nombre", Lastname: "$Apellido", Document: "$DNI", Address: "$Direccion", Phone: "$Telefono", Position: "$Cargo"});
+db.empleado.find({ Cargo: { $eq: "Vendedor" } }, { ID: "$ID_Empleado", Name: "$Nombre", Lastname: "$Apellido", Document: "$DNI", Address: "$Direccion", Phone: "$Telefono", Position: "$Cargo" });
+
+// 7. Mostrar la cantidad total de automoviles disponibles en cada sucursal
+use("db_campus_alquiler");
+db.sucursal.aggregate([
+    {
+        $lookup: {
+            from: "sucursal_automovil",
+            localField: "ID_Sucursal",
+            foreignField: "sucursal_id",
+            as: "automoviles"
+        }
+    },
+    {
+        $unwind: "$automoviles"
+    },
+    {
+        $group: {
+            _id: "$ID_Sucursal",
+            Name: { $first: "$Nombre" },
+            Address: { $first: "$Direccion" },
+            Phone: { $first: "$Telefono" },
+            Cantidad_Disponible: { $sum: "$automoviles.Cantidad_Disponible" }
+        }
+    },
+    {
+        $project: {
+            "_id": 0,
+            "ID": "$_id",
+            "Name": 1,
+            "Address": 1,
+            "Phone": 1,
+            "Cantidad_Disponible": 1
+        }
+    }
+]);
