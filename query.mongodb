@@ -816,3 +816,8 @@ db.sucursal.aggregate([
 use("db_campus_alquiler");
 db.alquiler.find({ ID_Alquiler: { $eq: 1 } }, { ID: "$ID_Alquiler", Costo: "$Costo_Total", "_id": 0 });
 
+// 9. Listar los clientes con DNI especifico
+
+// 10. Mostrar todos los automóviles con una capacidad mayor a 5 personas.
+use("db_campus_alquiler");
+db.automovil.find({ Capacidad: { $gt: 5 } }, { ID: "$ID_Automovil", Brand: "$Marca", Model: "$Modelo",Year:"$anio",Type:"$Tipo",Precio:"$Precio_Diario", "_id": 0 });
