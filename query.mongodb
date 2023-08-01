@@ -973,3 +973,21 @@ db.sucursal.aggregate([
         }
     }
 ]);
+
+// 17. Obtener la cantidad total de alquileres registrados en la base de datos.
+// db.alquiler.countDocuments({});
+use("db_campus_alquiler");
+db.alquiler.aggregate([
+    {
+      $group: {
+        _id: null,
+        cantidad_registros: { $sum: 1 }
+      }
+    },
+    {
+      $project: {
+        _id: 0,
+        cantidad_registros: 1
+      }
+    }
+  ]);
