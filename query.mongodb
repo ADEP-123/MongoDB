@@ -363,7 +363,6 @@ db.alquiler.insertMany([
 
 // Coleccion empleado
 db.createCollection("empleado");
-
 db.empleado.insertMany([
     {
         _id: 1,
@@ -424,8 +423,59 @@ db.empleado.insertMany([
         Direccion: "Avenida 45 #10-5",
         Telefono: "3182345678",
         Cargo: "Analista de Marketing"
+    },
+    {
+        _id: 7,
+        ID_Empleado: 7,
+        Nombre: "Marta",
+        Apellido: "Hernández",
+        DNI: "198765432",
+        Direccion: "Carrera 54 # 21 - 98",
+        Telefono: "3145678901",
+        Cargo: "Vendedor"
+    },
+    {
+        _id: 8,
+        ID_Empleado: 8,
+        Nombre: "Pedro",
+        Apellido: "González",
+        DNI: "189076543",
+        Direccion: "Avenida 78 # 12 - 34",
+        Telefono: "3178901234",
+        Cargo: "Vendedor"
+    },
+    {
+        _id: 9,
+        ID_Empleado: 9,
+        Nombre: "Sofía",
+        Apellido: "Silva",
+        DNI: "210987654",
+        Direccion: "Calle 45 # 67 - 89",
+        Telefono: "3105678901",
+        Cargo: "Vendedor"
+    },
+    {
+        _id: 10,
+        ID_Empleado: 10,
+        Nombre: "Daniel",
+        Apellido: "Pérez",
+        DNI: "167890543",
+        Direccion: "Avenida 21 # 34 - 56",
+        Telefono: "3156789012",
+        Cargo: "Vendedor"
+    },
+    {
+        _id: 11,
+        ID_Empleado: 11,
+        Nombre: "Carolina",
+        Apellido: "Mendoza",
+        DNI: "123456789",
+        Direccion: "Carrera 78 # 90 - 12",
+        Telefono: "3123456789",
+        Cargo: "Vendedor"
     }
 ]);
+
 
 // Coleccion registro_entrega
 db.createCollection("registro_entrega");
@@ -694,20 +744,30 @@ db.reserva.aggregate([
         $unwind: "$automovil_info"
     },
     {
+        $group: {
+            _id: "$cliente_id",
+            cliente_info: { $first: "$cliente_info" },
+            reserva_info: {
+                $push: {
+                    "ID": "$ID_Reserva",
+                    "Booking": "$Fecha_Reserva",
+                    "Start": "$Fecha_Inicio",
+                    "End": "$Fecha_Fin",
+                    "Status": "$Estado"
+                }
+            },
+            automovil_info: { $push: "$automovil_info" }
+        }
+    },
+    {
         $project: {
             "_id": 0,
-            "reserva_info": {
-                "ID": "$ID_Reserva",
-                "Booking": "$Fecha_Reserva",
-                "Start": "$Fecha_Inicio",
-                "End": "$Fecha_Fin",
-                "Status": "$Estado"
-            },
             "cliente_info": {
                 "Document": "$cliente_info.DNI",
                 "Name": "$cliente_info.Nombre",
                 "Lastname": "$cliente_info.Apellido"
             },
+            "reserva_info": 1,
             "automovil_info": {
                 "Brand": "$automovil_info.Marca",
                 "Model": "$automovil_info.Modelo",
@@ -719,4 +779,8 @@ db.reserva.aggregate([
 
 // 5. Obtener los detalles del alquiler con el ID_Alquiler especifico
 use("db_campus_alquiler");
-db.alquiler.find({ ID_Alquiler: { $eq: 1 } }, { ID: "$ID_Alquiler", Client: "$cliente_id", Vehicle: "$automovil_id", Start: "$Fecha_Inicio", End: "$Fecha_Fin", Cost: "$Costo_Total", Status: "$Estado"});
+db.alquiler.find({ ID_Alquiler: { $eq: 1 } }, { ID: "$ID_Alquiler", Client: "$cliente_id", Vehicle: "$automovil_id", Start: "$Fecha_Inicio", End: "$Fecha_Fin", Cost: "$Costo_Total", Status: "$Estado" });
+
+// 6. Listar los emppleados con el cargo de vendedor
+use("db_campus_alquiler");
+db.empleado.find({ Cargo: { $eq: "Vendedor" } }, { ID: "$ID_Empleado", Name: "$Nombre", Lastname: "$Apellido", Document: "$DNI", Address: "$Direccion", Phone: "$Telefono", Position: "$Cargo"});
