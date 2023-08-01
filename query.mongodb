@@ -979,15 +979,20 @@ db.sucursal.aggregate([
 use("db_campus_alquiler");
 db.alquiler.aggregate([
     {
-      $group: {
-        _id: null,
-        cantidad_registros: { $sum: 1 }
-      }
+        $group: {
+            _id: null,
+            cantidad_registros: { $sum: 1 }
+        }
     },
     {
-      $project: {
-        _id: 0,
-        cantidad_registros: 1
-      }
+        $project: {
+            _id: 0,
+            cantidad_registros: 1
+        }
     }
-  ]);
+]);
+
+// 18. Mostrar los automóviles con capacidad igual a 5 personas y que estén disponibles.
+// db.alquiler.countDocuments({});
+use("db_campus_alquiler");
+db.automovil.find({ $and: [{ Capacidad: { $eq: 5 } }, { Estado: { $eq: "Disponible" } }] }, { ID: "$ID_Automovil", Brand: "$Marca", Model: "$Modelo", Year: "$anio", Type: "$Tipo", Precio: "$Precio_Diario", "_id": 0 });
