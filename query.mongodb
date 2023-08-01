@@ -653,3 +653,46 @@ db.alquiler.aggregate([
         }
     }
 ]);
+
+// 4. Mostrar todas las reservas pendientes con los datos del cliente y el automovil reservado
+use("db_campus_alquiler");
+db.reserva.aggregate([
+    { $match: { Estado: "Pendiente" } },
+    {
+        $lookup: {
+            from: "cliente",
+            localField: "cliente_id",
+            foreignField: "ID_Cliente",
+            as: "cliente_info"
+        }
+    },
+    {
+        $unwind: "$cliente_info"
+    },
+    {
+        $lookup: {
+            from: "automovil",
+            localField: "automovil_id",
+            foreignField: "ID_Automovil",
+            as: "automovil_info"
+        }
+    },
+    {
+        $unwind: "$automovil_info"
+    },
+    {
+        $project: {
+            "_id": 0,
+            "cliente_info.DNI": 1,
+            "cliente_info.Nombre": 1,
+            "cliente_info.Apellido": 1,
+            "automovil_info.Marca":1,
+            "automovil_info.Modelo":1,
+            "automovil_info.Anio":1,
+            "ID_Alquiler": 1,
+            "Fecha_Inicio": 1,
+            "Fecha_Fin": 1,
+            "Estado": 1,
+        }
+    }
+]);
