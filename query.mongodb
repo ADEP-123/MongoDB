@@ -938,3 +938,38 @@ db.alquiler.aggregate([
 // 15. Listar todos los automóviles ordenados por marca y modelo.
 use("db_campus_alquiler");
 db.automovil.find({}, { ID: "$ID_Automovil", Brand: "$Marca", Model: "$Modelo", Year: "$anio", Type: "$Tipo", Precio: "$Precio_Diario", "_id": 0 }).sort({ Brand: 1, Model: 1 });
+
+// 16. Mostrar la cantidad total de automóviles en cada sucursal junto con su dirección.
+use("db_campus_alquiler");
+db.sucursal.aggregate([
+    {
+        $lookup: {
+            from: "sucursal_automovil",
+            localField: "ID_Sucursal",
+            foreignField: "sucursal_id",
+            as: "automoviles"
+        }
+    },
+    {
+        $unwind: "$automoviles"
+    },
+    {
+        $group: {
+            _id: "$ID_Sucursal",
+            Name: { $first: "$Nombre" },
+            Address: { $first: "$Direccion" },
+            Phone: { $first: "$Telefono" },
+            Cantidad_Disponible: { $sum: "$automoviles.Cantidad_Disponible" }
+        }
+    },
+    {
+        $project: {
+            "_id": 0,
+            "ID": "$_id",
+            "Name": 1,
+            "Address": 1,
+            "Phone": 1,
+            "Cantidad_Disponible": 1
+        }
+    }
+]);
