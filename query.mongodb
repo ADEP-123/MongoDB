@@ -644,12 +644,14 @@ db.alquiler.aggregate([
         $group: {
             _id: "$cliente_id",
             cliente_info: { $first: "$cliente_info" },
-            alquileres: { $push: {
-                ID_Alquiler: "$ID_Alquiler",
-                Fecha_Inicio: "$Fecha_Inicio",
-                Fecha_Fin: "$Fecha_Fin",
-                Estado: "$Estado"
-            }}
+            alquileres: {
+                $push: {
+                    ID_Alquiler: "$ID_Alquiler",
+                    Fecha_Inicio: "$Fecha_Inicio",
+                    Fecha_Fin: "$Fecha_Fin",
+                    Estado: "$Estado"
+                }
+            }
         }
     },
     {
@@ -695,9 +697,9 @@ db.reserva.aggregate([
             "cliente_info.DNI": 1,
             "cliente_info.Nombre": 1,
             "cliente_info.Apellido": 1,
-            "automovil_info.Marca":1,
-            "automovil_info.Modelo":1,
-            "automovil_info.Anio":1,
+            "automovil_info.Marca": 1,
+            "automovil_info.Modelo": 1,
+            "automovil_info.Anio": 1,
             "ID_Alquiler": 1,
             "Fecha_Inicio": 1,
             "Fecha_Fin": 1,
@@ -706,6 +708,6 @@ db.reserva.aggregate([
     }
 ]);
 
-// 4. Mostrar todas las reservas pendientes con los datos del cliente y el automovil reservado
+// 5. Obtener los detalles del alquiler con el ID_Alquiler especifico
 use("db_campus_alquiler");
-db.alquiler.find({},{});
+db.alquiler.find({ ID_Alquiler: { $eq: 1 } }, {});
