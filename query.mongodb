@@ -467,8 +467,29 @@ db.empleado.insertMany([
         Direccion: "Carrera 78 # 90 - 12",
         Telefono: "3123456789",
         Cargo: "Vendedor"
-    }
+    },
+    {
+        _id: 12,
+        ID_Empleado: 12,
+        Nombre: "Juan",
+        Apellido: "Perez",
+        DNI: "987654321",
+        Direccion: "Avenida Central",
+        Telefono: "321456987",
+        Cargo: "Gerente"
+    },
+    {
+        _id: 13,
+        ID_Empleado: 13,
+        Nombre: "Maria",
+        Apellido: "Lopez",
+        DNI: "654321987",
+        Direccion: "Calle Principal",
+        Telefono: "987654321",
+        Cargo: "Asistente"
+    },
 ]);
+
 
 
 // Coleccion registro_entrega
@@ -829,7 +850,7 @@ db.alquiler.find({ Fecha_Inicio: { $eq: '2023-09-01' } }, { ID: "$ID_Alquiler", 
 // 12. Listar las reservas pendientes realizadas por un cliente específico.
 use("db_campus_alquiler");
 db.reserva.aggregate([
-    { $match: { Estado: "Pendiente", cliente_id: 1} },
+    { $match: { Estado: "Pendiente", cliente_id: 1 } },
     {
         $lookup: {
             from: "cliente",
@@ -868,3 +889,7 @@ db.reserva.aggregate([
         }
     }
 ]);
+
+// 13. Mostrar los empleados con cargo de "Gerente" o "Asistente".
+use("db_campus_alquiler");
+db.empleado.find({ Cargo: { $in: ["Gerente", "Asistente"] } }, { ID: "$ID_Empleado", Name: "$Nombre", Lastname: "$Apellido", Document: "$DNI", Address: "$Direccion", Phone: "$Telefono", Position: "$Cargo" });
