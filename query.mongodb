@@ -612,7 +612,7 @@ db.sucursal_automovil.aggregate([
     },
     {
         $project: {
-            "_id":0,
+            "_id": 0,
             "automovil_info.ID_Automovil": 1,
             "automovil_info.Marca": 1,
             "automovil_info.Modelo": 1,
@@ -621,6 +621,35 @@ db.sucursal_automovil.aggregate([
             "sucursal_info.ID_Sucursal": 1,
             "sucursal_info.Nombre": 1,
             "Cantidad_Disponible": 1
+        }
+    }
+]);
+
+// 3. Listar todos los alquileres activos junto con los datos de los clientes relacionados
+use("db_campus_alquiler");
+db.alquiler.aggregate([
+    { $match: { Estado: "Activo" } },
+    {
+        $lookup: {
+            from: "cliente",
+            localField: "cliente_id",
+            foreignField: "ID_Cliente",
+            as: "cliente_info"
+        }
+    },
+    {
+        $unwind: "$cliente_info"
+    },
+    {
+        $project: {
+            "_id": 0,
+            "cliente_info.DNI": 1,
+            "cliente_info.Nombre": 1,
+            "cliente_info.Apellido": 1,
+            "ID_Alquiler": 1,
+            "Fecha_Inicio": 1,
+            "Fecha_Fin": 1,
+            "Estado": 1,
         }
     }
 ]);
