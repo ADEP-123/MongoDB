@@ -172,7 +172,7 @@ db.cliente.insertMany([
         DNI: "1098817776",
         Direccion: "Calle 100 # 35 - 25 Barrio",
         Telefono: "3175478156",
-        Email: "andresdavidelizalde2gmail.com"
+        Email: "andresdavidelizalde@gmail.com"
     },
     {
         _id: 2,
@@ -581,3 +581,6 @@ db.sucursal.aggregate([
         }
     }
 ]);
+// 1.Obtener todos los clientes
+use("db_campus_alquiler");
+db.cliente.find({}, { "ID_Cliente": 1, "Nombre": 1, "Apellido": 1, "_id": 0 })
