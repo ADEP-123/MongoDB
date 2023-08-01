@@ -893,3 +893,44 @@ db.reserva.aggregate([
 // 13. Mostrar los empleados con cargo de "Gerente" o "Asistente".
 use("db_campus_alquiler");
 db.empleado.find({ Cargo: { $in: ["Gerente", "Asistente"] } }, { ID: "$ID_Empleado", Name: "$Nombre", Lastname: "$Apellido", Document: "$DNI", Address: "$Direccion", Phone: "$Telefono", Position: "$Cargo" });
+
+// 14. Obtener los datos de los clientes que realizaron al menos un alquiler.
+use("db_campus_alquiler");
+db.alquiler.aggregate([
+    {
+        $lookup: {
+            from: "cliente",
+            localField: "cliente_id",
+            foreignField: "ID_Cliente",
+            as: "cliente_info"
+        }
+    },
+    {
+        $unwind: "$cliente_info"
+    },
+    {
+        $group: {
+            _id: "$cliente_id",
+            cliente_info: { $first: "$cliente_info" },
+            alquileres: {
+                $push: {
+                    ID_Alquiler: "$ID_Alquiler",
+                    Fecha_Inicio: "$Fecha_Inicio",
+                    Fecha_Fin: "$Fecha_Fin",
+                    Estado: "$Estado"
+                }
+            }
+        }
+    },
+    {
+        $project: {
+            "_id": 0,
+            "cliente_info": {
+                "Name": "$cliente_info.Nombre",
+                "Lastname": "$cliente_info.Apellido",
+                "Document": "$cliente_info.DNI"
+            },
+            "alquileres": 1
+        }
+    }
+]);
