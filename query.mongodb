@@ -1,0 +1,583 @@
+use("db_campus_alquiler");
+
+
+// Coleccion Sucursal
+db.createCollection("sucursal");
+
+db.sucursal.insertMany([
+    {
+        _id: 1,
+        ID_Sucursal: 1,
+        Nombre: "Zona Franca",
+        Direccion: "Florida",
+        Telefono: 123456789
+    },
+    {
+        _id: 2,
+        ID_Sucursal: 2,
+        Nombre: "Sucursal A",
+        Direccion: "Calle Principal",
+        Telefono: 987654321
+    },
+    {
+        _id: 3,
+        ID_Sucursal: 3,
+        Nombre: "Sucursal B",
+        Direccion: "Avenida Central",
+        Telefono: 543216789
+    },
+    {
+        _id: 4,
+        ID_Sucursal: 4,
+        Nombre: "Sucursal C",
+        Direccion: "Plaza Mayor",
+        Telefono: 987654123
+    },
+    {
+        _id: 5,
+        ID_Sucursal: 5,
+        Nombre: "Sucursal D",
+        Direccion: "Avenida de la Libertad",
+        Telefono: 654321789
+    },
+    {
+        _id: 6,
+        ID_Sucursal: 6,
+        Nombre: "Sucursal E",
+        Direccion: "Calle de la Victoria",
+        Telefono: 987321654
+    }
+]);
+
+
+// Coleccion automovil
+db.createCollection("automovil");
+
+db.automovil.insertMany([
+    {
+        _id: 1,
+        ID_Automovil: 1,
+        Marca: "Jeep",
+        Modelo: "Rubicoon",
+        Anio: "2023",
+        Tipo: "Camioneta",
+        Capacidad: 6,
+        Precio_Diario: 150000
+    },
+    {
+        _id: 2,
+        ID_Automovil: 2,
+        Marca: "Toyota",
+        Modelo: "Corolla",
+        Anio: "2023",
+        Tipo: "Sedán",
+        Capacidad: 5,
+        Precio_Diario: 120000
+    },
+    {
+        _id: 3,
+        ID_Automovil: 3,
+        Marca: "Ford",
+        Modelo: "Mustang",
+        Anio: "2023",
+        Tipo: "Deportivo",
+        Capacidad: 4,
+        Precio_Diario: 180000
+    },
+    {
+        _id: 4,
+        ID_Automovil: 4,
+        Marca: "Honda",
+        Modelo: "Civic",
+        Anio: "2023",
+        Tipo: "Sedán",
+        Capacidad: 5,
+        Precio_Diario: 125000
+    },
+    {
+        _id: 5,
+        ID_Automovil: 5,
+        Marca: "Chevrolet",
+        Modelo: "Tahoe",
+        Anio: "2023",
+        Tipo: "SUV",
+        Capacidad: 7,
+        Precio_Diario: 175000
+    },
+    {
+        _id: 6,
+        ID_Automovil: 6,
+        Marca: "Nissan",
+        Modelo: "X-Trail",
+        Anio: "2023",
+        Tipo: "SUV",
+        Capacidad: 5,
+        Precio_Diario: 135000
+    }
+]);
+
+
+// Coleccion sucursal_automovil
+db.createCollection("sucursal_automovil");
+
+db.sucursal_automovil.insertMany([
+    {
+        _id: 1,
+        sucursal_id: 1,
+        automovil_id: 1,
+        Cantidad_Disponible: 5
+    },
+    {
+        _id: 2,
+        sucursal_id: 1,
+        automovil_id: 1,
+        Cantidad_Disponible: 20
+    },
+    {
+        _id: 3,
+        sucursal_id: 1,
+        automovil_id: 2,
+        Cantidad_Disponible: 15
+    },
+    {
+        _id: 4,
+        sucursal_id: 2,
+        automovil_id: 3,
+        Cantidad_Disponible: 18
+    },
+    {
+        _id: 5,
+        sucursal_id: 2,
+        automovil_id: 4,
+        Cantidad_Disponible: 12
+    },
+    {
+        _id: 6,
+        sucursal_id: 3,
+        automovil_id: 5,
+        Cantidad_Disponible: 25
+    }
+]);
+
+
+// Coleccion cliente
+db.createCollection("cliente");
+
+db.cliente.insertMany([
+    {
+        _id: 1,
+        ID_Cliente: 1,
+        Nombre: "Andres David",
+        Apellido: "Elizalde Peralta",
+        DNI: "1098817776",
+        Direccion: "Calle 100 # 35 - 25 Barrio",
+        Telefono: "3175478156",
+        Email: "andresdavidelizalde2gmail.com"
+    },
+    {
+        _id: 2,
+        ID_Cliente: 2,
+        Nombre: "María",
+        Apellido: "Gómez Pérez",
+        DNI: "2087654321",
+        Direccion: "Avenida Principal #45",
+        Telefono: "3159876543",
+        Email: "maria.gomez@example.com"
+    },
+    {
+        _id: 3,
+        ID_Cliente: 3,
+        Nombre: "Juan",
+        Apellido: "Martínez Ruiz",
+        DNI: "3056789123",
+        Direccion: "Calle 80 #20-10",
+        Telefono: "3141234567",
+        Email: "juan.martinez@example.com"
+    },
+    {
+        _id: 4,
+        ID_Cliente: 4,
+        Nombre: "Laura",
+        Apellido: "Sánchez Rojas",
+        DNI: "4087654321",
+        Direccion: "Carrera 70 #15-30",
+        Telefono: "3175678912",
+        Email: "laura.sanchez@example.com"
+    },
+    {
+        _id: 5,
+        ID_Cliente: 5,
+        Nombre: "Pedro",
+        Apellido: "López Gutiérrez",
+        DNI: "5023456789",
+        Direccion: "Calle 60 #25-15",
+        Telefono: "3167890123",
+        Email: "pedro.lopez@example.com"
+    },
+    {
+        _id: 6,
+        ID_Cliente: 6,
+        Nombre: "Ana",
+        Apellido: "Hernández Jiménez",
+        DNI: "6098765432",
+        Direccion: "Avenida 45 #10-5",
+        Telefono: "3182345678",
+        Email: "ana.hernandez@example.com"
+    }
+]);
+
+
+// Coleccion reserva
+db.createCollection("reserva");
+
+db.reserva.insertMany([
+    {
+        _id: 1,
+        ID_Reserva: 1,
+        cliente_id: 1,
+        automovil_id: 1,
+        Fecha_Reserva: "2023-07-25",
+        Fecha_Inicio: "2023-07-25",
+        Fecha_Fin: "2023-08-10",
+        Estado: "Activo"
+    },
+    {
+        _id: 2,
+        ID_Reserva: 2,
+        cliente_id: 2,
+        automovil_id: 3,
+        Fecha_Reserva: "2023-08-01",
+        Fecha_Inicio: "2023-08-05",
+        Fecha_Fin: "2023-08-15",
+        Estado: "Activo"
+    },
+    {
+        _id: 3,
+        ID_Reserva: 3,
+        cliente_id: 1,
+        automovil_id: 5,
+        Fecha_Reserva: "2023-08-10",
+        Fecha_Inicio: "2023-08-20",
+        Fecha_Fin: "2023-08-25",
+        Estado: "Activo"
+    },
+    {
+        _id: 4,
+        ID_Reserva: 4,
+        cliente_id: 3,
+        automovil_id: 2,
+        Fecha_Reserva: "2023-08-12",
+        Fecha_Inicio: "2023-08-18",
+        Fecha_Fin: "2023-08-24",
+        Estado: "Activo"
+    },
+    {
+        _id: 5,
+        ID_Reserva: 5,
+        cliente_id: 4,
+        automovil_id: 4,
+        Fecha_Reserva: "2023-08-15",
+        Fecha_Inicio: "2023-08-25",
+        Fecha_Fin: "2023-09-05",
+        Estado: "Activo"
+    },
+    {
+        _id: 6,
+        ID_Reserva: 6,
+        cliente_id: 5,
+        automovil_id: 6,
+        Fecha_Reserva: "2023-08-20",
+        Fecha_Inicio: "2023-09-01",
+        Fecha_Fin: "2023-09-10",
+        Estado: "Activo"
+    }
+]);
+
+
+// Coleccion alquiler
+db.createCollection("alquiler");
+
+db.alquiler.insertMany([
+    {
+        _id: 1,
+        ID_Alquiler: 1,
+        cliente_id: 1,
+        automovil_id: 1,
+        Fecha_Inicio: "2023-07-25",
+        Fecha_Fin: "2023-08-10",
+        Costo_Total: 2400000,
+        Estado: "Pendiente"
+    },
+    {
+        _id: 2,
+        ID_Alquiler: 2,
+        cliente_id: 2,
+        automovil_id: 3,
+        Fecha_Inicio: "2023-08-05",
+        Fecha_Fin: "2023-08-15",
+        Costo_Total: 1800000,
+        Estado: "Pendiente"
+    },
+    {
+        _id: 3,
+        ID_Alquiler: 3,
+        cliente_id: 1,
+        automovil_id: 5,
+        Fecha_Inicio: "2023-08-20",
+        Fecha_Fin: "2023-08-25",
+        Costo_Total: 2250000,
+        Estado: "Pendiente"
+    },
+    {
+        _id: 4,
+        ID_Alquiler: 4,
+        cliente_id: 3,
+        automovil_id: 2,
+        Fecha_Inicio: "2023-08-18",
+        Fecha_Fin: "2023-08-24",
+        Costo_Total: 2100000,
+        Estado: "Pendiente"
+    },
+    {
+        _id: 5,
+        ID_Alquiler: 5,
+        cliente_id: 4,
+        automovil_id: 4,
+        Fecha_Inicio: "2023-08-25",
+        Fecha_Fin: "2023-09-05",
+        Costo_Total: 2700000,
+        Estado: "Pendiente"
+    },
+    {
+        _id: 6,
+        ID_Alquiler: 6,
+        cliente_id: 5,
+        automovil_id: 6,
+        Fecha_Inicio: "2023-09-01",
+        Fecha_Fin: "2023-09-10",
+        Costo_Total: 1500000,
+        Estado: "Pendiente"
+    }
+]);
+
+
+// Coleccion empleado
+db.createCollection("empleado");
+
+db.empleado.insertMany([
+    {
+        _id: 1,
+        ID_Empleado: 1,
+        Nombre: "Paco",
+        Apellido: "Elpa Raco",
+        DNI: "1098547889",
+        Direccion: "Calle 526 # 10 - 13 Barrio",
+        Telefono: "3158695487",
+        Cargo: "Auxiliar Contable"
+    },
+    {
+        _id: 2,
+        ID_Empleado: 2,
+        Nombre: "Luisa",
+        Apellido: "Gómez Rojas",
+        DNI: "2087465832",
+        Direccion: "Avenida Central #35",
+        Telefono: "3176547890",
+        Cargo: "Gerente de Ventas"
+    },
+    {
+        _id: 3,
+        ID_Empleado: 3,
+        Nombre: "Ana",
+        Apellido: "Martínez Sánchez",
+        DNI: "3058764312",
+        Direccion: "Calle 80 #20-10",
+        Telefono: "3149081726",
+        Cargo: "Asistente de Recursos Humanos"
+    },
+    {
+        _id: 4,
+        ID_Empleado: 4,
+        Nombre: "Carlos",
+        Apellido: "López Gutierrez",
+        DNI: "4087650987",
+        Direccion: "Carrera 70 #15-30",
+        Telefono: "3171234567",
+        Cargo: "Técnico de Soporte"
+    },
+    {
+        _id: 5,
+        ID_Empleado: 5,
+        Nombre: "Laura",
+        Apellido: "Hernández Jiménez",
+        DNI: "5023456712",
+        Direccion: "Calle 60 #25-15",
+        Telefono: "3167891234",
+        Cargo: "Contadora"
+    },
+    {
+        _id: 6,
+        ID_Empleado: 6,
+        Nombre: "Pedro",
+        Apellido: "Ramírez Pérez",
+        DNI: "6098763412",
+        Direccion: "Avenida 45 #10-5",
+        Telefono: "3182345678",
+        Cargo: "Analista de Marketing"
+    }
+]);
+
+// Coleccion registro_entrega
+db.createCollection("registro_entrega");
+
+db.registro_entrega.insertMany([
+    {
+        _id: 1,
+        ID_Registro: 1,
+        alquiler_id: 1,
+        empleado_id: 1,
+        Fecha_Entrega: "2023-07-25",
+        Combustible_Entregado: 10,
+        Kilometraje_Entregado: 2470
+    },
+    {
+        _id: 2,
+        ID_Registro: 2,
+        alquiler_id: 2,
+        empleado_id: 3,
+        Fecha_Entrega: "2023-08-05",
+        Combustible_Entregado: 9.5,
+        Kilometraje_Entregado: 2870
+    },
+    {
+        _id: 3,
+        ID_Registro: 3,
+        alquiler_id: 3,
+        empleado_id: 2,
+        Fecha_Entrega: "2023-08-10",
+        Combustible_Entregado: 11.2,
+        Kilometraje_Entregado: 2990
+    },
+    {
+        _id: 4,
+        ID_Registro: 4,
+        alquiler_id: 4,
+        empleado_id: 5,
+        Fecha_Entrega: "2023-08-18",
+        Combustible_Entregado: 9.8,
+        Kilometraje_Entregado: 3120
+    },
+    {
+        _id: 5,
+        ID_Registro: 5,
+        alquiler_id: 5,
+        empleado_id: 4,
+        Fecha_Entrega: "2023-08-25",
+        Combustible_Entregado: 10.5,
+        Kilometraje_Entregado: 3240
+    },
+    {
+        _id: 6,
+        ID_Registro: 6,
+        alquiler_id: 6,
+        empleado_id: 6,
+        Fecha_Entrega: "2023-09-01",
+        Combustible_Entregado: 9.0,
+        Kilometraje_Entregado: 3010
+    }
+]);
+
+
+// Coleccion registro_devolucion
+db.createCollection("registro_devolucion");
+
+db.registro_devolucion.insertMany([
+    {
+        _id: 1,
+        ID_Registro: 1,
+        alquiler_id: 1,
+        empleado_id: 1,
+        Fecha_Devolucion: "2023-08-10",
+        Combustible_Devuelto: 5.5,
+        Kilometraje_Entregado: 2580,
+        Monto_Adicional: 110000
+    },
+    {
+        _id: 2,
+        ID_Registro: 2,
+        alquiler_id: 2,
+        empleado_id: 3,
+        Fecha_Devolucion: "2023-08-15",
+        Combustible_Devuelto: 7.2,
+        Kilometraje_Entregado: 3100,
+        Monto_Adicional: 90000
+    },
+    {
+        _id: 3,
+        ID_Registro: 3,
+        alquiler_id: 3,
+        empleado_id: 2,
+        Fecha_Devolucion: "2023-08-25",
+        Combustible_Devuelto: 4.8,
+        Kilometraje_Entregado: 2800,
+        Monto_Adicional: 75000
+    },
+    {
+        _id: 4,
+        ID_Registro: 4,
+        alquiler_id: 4,
+        empleado_id: 5,
+        Fecha_Devolucion: "2023-09-05",
+        Combustible_Devuelto: 6.3,
+        Kilometraje_Entregado: 2950,
+        Monto_Adicional: 85000
+    },
+    {
+        _id: 5,
+        ID_Registro: 5,
+        alquiler_id: 5,
+        empleado_id: 4,
+        Fecha_Devolucion: "2023-09-10",
+        Combustible_Devuelto: 8.0,
+        Kilometraje_Entregado: 3200,
+        Monto_Adicional: 70000
+    },
+    {
+        _id: 6,
+        ID_Registro: 6,
+        alquiler_id: 6,
+        empleado_id: 6,
+        Fecha_Devolucion: "2023-09-15",
+        Combustible_Devuelto: 6.8,
+        Kilometraje_Entregado: 3000,
+        Monto_Adicional: 80000
+    }
+]);
+
+
+
+// Consultas
+use("db_campus_alquiler");
+db.sucursal.aggregate([
+    {
+        $match: {
+            ID_Sucursal: 1
+        }
+    },
+    {
+        $lookup: {
+            from: "sucursal_automovil",
+            localField: "_id",
+            foreignField: "sucursal_id",
+            as: "autos"
+        }
+    },
+    {
+        $project: {
+            _id: 0,
+            Nombre: 1,
+            "autos._id": 1,
+            "autos.Cantidad_Disponible": 1
+        }
+    }
+]);
