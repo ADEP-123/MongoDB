@@ -239,7 +239,7 @@ db.reserva.insertMany([
         Fecha_Reserva: "2023-07-25",
         Fecha_Inicio: "2023-07-25",
         Fecha_Fin: "2023-08-10",
-        Estado: "Activo"
+        Estado: "Pendiente"
     },
     {
         _id: 2,
@@ -249,7 +249,7 @@ db.reserva.insertMany([
         Fecha_Reserva: "2023-08-01",
         Fecha_Inicio: "2023-08-05",
         Fecha_Fin: "2023-08-15",
-        Estado: "Activo"
+        Estado: "Pendiente"
     },
     {
         _id: 3,
@@ -259,7 +259,7 @@ db.reserva.insertMany([
         Fecha_Reserva: "2023-08-10",
         Fecha_Inicio: "2023-08-20",
         Fecha_Fin: "2023-08-25",
-        Estado: "Activo"
+        Estado: "Pendiente"
     },
     {
         _id: 4,
@@ -269,7 +269,7 @@ db.reserva.insertMany([
         Fecha_Reserva: "2023-08-12",
         Fecha_Inicio: "2023-08-18",
         Fecha_Fin: "2023-08-24",
-        Estado: "Activo"
+        Estado: "Pendiente"
     },
     {
         _id: 5,
@@ -279,7 +279,7 @@ db.reserva.insertMany([
         Fecha_Reserva: "2023-08-15",
         Fecha_Inicio: "2023-08-25",
         Fecha_Fin: "2023-09-05",
-        Estado: "Activo"
+        Estado: "Pendiente"
     },
     {
         _id: 6,
@@ -289,7 +289,7 @@ db.reserva.insertMany([
         Fecha_Reserva: "2023-08-20",
         Fecha_Inicio: "2023-09-01",
         Fecha_Fin: "2023-09-10",
-        Estado: "Activo"
+        Estado: "Pendiente"
     }
 ]);
 
@@ -306,7 +306,7 @@ db.alquiler.insertMany([
         Fecha_Inicio: "2023-07-25",
         Fecha_Fin: "2023-08-10",
         Costo_Total: 2400000,
-        Estado: "Pendiente"
+        Estado: "Activo"
     },
     {
         _id: 2,
@@ -316,7 +316,7 @@ db.alquiler.insertMany([
         Fecha_Inicio: "2023-08-05",
         Fecha_Fin: "2023-08-15",
         Costo_Total: 1800000,
-        Estado: "Pendiente"
+        Estado: "Disponible"
     },
     {
         _id: 3,
@@ -326,7 +326,7 @@ db.alquiler.insertMany([
         Fecha_Inicio: "2023-08-20",
         Fecha_Fin: "2023-08-25",
         Costo_Total: 2250000,
-        Estado: "Pendiente"
+        Estado: "Activo"
     },
     {
         _id: 4,
@@ -336,7 +336,7 @@ db.alquiler.insertMany([
         Fecha_Inicio: "2023-08-18",
         Fecha_Fin: "2023-08-24",
         Costo_Total: 2100000,
-        Estado: "Pendiente"
+        Estado: "Disponible"
     },
     {
         _id: 5,
@@ -346,7 +346,7 @@ db.alquiler.insertMany([
         Fecha_Inicio: "2023-08-25",
         Fecha_Fin: "2023-09-05",
         Costo_Total: 2700000,
-        Estado: "Pendiente"
+        Estado: "Activo"
     },
     {
         _id: 6,
@@ -356,7 +356,7 @@ db.alquiler.insertMany([
         Fecha_Inicio: "2023-09-01",
         Fecha_Fin: "2023-09-10",
         Costo_Total: 1500000,
-        Estado: "Pendiente"
+        Estado: "Disponible"
     }
 ]);
 
@@ -584,3 +584,43 @@ db.sucursal.aggregate([
 // 1.Obtener todos los clientes
 use("db_campus_alquiler");
 db.cliente.find({}, { "ID_Cliente": 1, "Nombre": 1, "Apellido": 1, "_id": 0 })
+
+// 2. Obtener todos los automoviles disponibles para alquiler
+use("db_campus_alquiler");
+db.sucursal_automovil.aggregate([
+    {
+        $lookup: {
+            from: "automovil",
+            localField: "automovil_id",
+            foreignField: "ID_Automovil",
+            as: "automovil_info"
+        }
+    },
+    {
+        $unwind: "$automovil_info"
+    },
+    {
+        $lookup: {
+            from: "sucursal",
+            localField: "sucursal_id",
+            foreignField: "ID_Sucursal",
+            as: "sucursal_info"
+        }
+    },
+    {
+        $unwind: "$sucursal_info"
+    },
+    {
+        $project: {
+            "_id":0,
+            "automovil_info.ID_Automovil": 1,
+            "automovil_info.Marca": 1,
+            "automovil_info.Modelo": 1,
+            "automovil_info.Anio": 1,
+            "automovil_info.Tipo": 1,
+            "sucursal_info.ID_Sucursal": 1,
+            "sucursal_info.Nombre": 1,
+            "Cantidad_Disponible": 1
+        }
+    }
+]);
