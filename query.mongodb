@@ -934,3 +934,7 @@ db.alquiler.aggregate([
         }
     }
 ]);
+
+// 15. Listar todos los automóviles ordenados por marca y modelo.
+use("db_campus_alquiler");
+db.automovil.find({}, { ID: "$ID_Automovil", Brand: "$Marca", Model: "$Modelo", Year: "$anio", Type: "$Tipo", Precio: "$Precio_Diario", "_id": 0 }).sort({ Brand: 1, Model: 1 });
