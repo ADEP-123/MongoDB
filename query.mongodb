@@ -769,7 +769,13 @@ db.reserva.aggregate([
                     "Status": "$Estado"
                 }
             },
-            automovil_info: { $push: "$automovil_info" }
+            automovil_info: { 
+                $push: {
+                    "Brand": "$automovil_info.Marca",
+                    "Model": "$automovil_info.Modelo",
+                    "Year": "$automovil_info.Anio"
+                }
+            }
         }
     },
     {
@@ -781,11 +787,7 @@ db.reserva.aggregate([
                 "Lastname": "$cliente_info.Apellido"
             },
             "reserva_info": 1,
-            "automovil_info": {
-                "Brand": "$automovil_info.Marca",
-                "Model": "$automovil_info.Modelo",
-                "Year": "$automovil_info.Anio"
-            }
+            "automovil_info": 1
         }
     }
 ]);
