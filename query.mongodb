@@ -838,6 +838,8 @@ use("db_campus_alquiler");
 db.alquiler.find({ ID_Alquiler: { $eq: 1 } }, { ID: "$ID_Alquiler", Costo: "$Costo_Total", "_id": 0 });
 
 // 9. Listar los clientes con DNI especifico
+use("db_campus_alquiler");
+db.cliente.find({ DNI: { $eq: "1098817776" } }, { ID: "$ID_Cliente", Name: "$Nombre", LastName: "$Apellido", "_id": 0 })
 
 // 10. Mostrar todos los automóviles con una capacidad mayor a 5 personas.
 use("db_campus_alquiler");
@@ -997,7 +999,7 @@ db.alquiler.aggregate([
 use("db_campus_alquiler");
 db.automovil.find({ $and: [{ Capacidad: { $eq: 5 } }, { Estado: { $eq: "Disponible" } }] }, { ID: "$ID_Automovil", Brand: "$Marca", Model: "$Modelo", Year: "$anio", Type: "$Tipo", Precio: "$Precio_Diario", "_id": 0 });
 
-// 19. Obtener los datos del cliente que realizó la reserva con
+// 19.Obtener los datos del cliente que realizó la reserva con ID_Reserva específico.
 
 // 20. Listar los alquileres con fecha de inicio entre '2023-07-05' y '2023-07-10'.
 use("db_campus_alquiler");
