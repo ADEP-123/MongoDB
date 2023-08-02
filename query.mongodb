@@ -997,6 +997,39 @@ use("db_campus_alquiler");
 db.automovil.find({ $and: [{ Capacidad: { $eq: 5 } }, { Estado: { $eq: "Disponible" } }] }, { ID: "$ID_Automovil", Brand: "$Marca", Model: "$Modelo", Year: "$anio", Type: "$Tipo", Precio: "$Precio_Diario", "_id": 0 });
 
 // 19.Obtener los datos del cliente que realizó la reserva con ID_Reserva específico.
+use("db_campus_alquiler");
+db.reserva.aggregate([
+    { $match: { ID_Reserva: 1 } },
+    {
+        $lookup: {
+            from: "cliente",
+            localField: "cliente_id",
+            foreignField: "ID_Cliente",
+            as: "cliente_info"
+        }
+    },
+    {
+        $unwind: "$cliente_info"
+    },
+    {
+        $project: {
+            "_id": 0,
+            "cliente_info": {
+                "Document": "$cliente_info.DNI",
+                "Name": "$cliente_info.Nombre",
+                "Lastname": "$cliente_info.Apellido"
+            },
+            "reserva_info": {
+                "ID": "$ID_Reserva",
+                "Booking": "$Fecha_Reserva",
+                "Start": "$Fecha_Inicio",
+                "End": "$Fecha_Fin",
+                "Status": "$Estado"
+            }
+        }
+    }
+]);
+
 
 // 20. Listar los alquileres con fecha de inicio entre '2023-07-05' y '2023-07-10'.
 use("db_campus_alquiler");
