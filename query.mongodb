@@ -766,11 +766,7 @@ db.reserva.aggregate([
                     "Booking": "$Fecha_Reserva",
                     "Start": "$Fecha_Inicio",
                     "End": "$Fecha_Fin",
-                    "Status": "$Estado"
-                }
-            },
-            automovil_info: { 
-                $push: {
+                    "Status": "$Estado",
                     "Brand": "$automovil_info.Marca",
                     "Model": "$automovil_info.Modelo",
                     "Year": "$automovil_info.Anio"
@@ -787,7 +783,6 @@ db.reserva.aggregate([
                 "Lastname": "$cliente_info.Apellido"
             },
             "reserva_info": 1,
-            "automovil_info": 1
         }
     }
 ]);
