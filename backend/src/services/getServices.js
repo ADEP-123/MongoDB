@@ -1,8 +1,8 @@
-import { connection } from "../../db/atlas.js";
+import Sucursal from "../entities/surcursal.js";
+
 const getAllSucursalService = async (id) => {
-    const db = await connection();
-    const coleccion = db.collection("sucursal");
-    const result = await coleccion.find().toArray();
+    const sucursal = new Sucursal(id)
+    const result = await sucursal.getAllSucursal()
     return result;
 };
 export {
