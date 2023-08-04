@@ -1,6 +1,6 @@
 import express from 'express';
 
-import initApiRoutes from './routes/routes.js';
+import initApiRoutes from './src/routes/routes.js';
 
 const appExpress = express();
 appExpress.use(express.json())
