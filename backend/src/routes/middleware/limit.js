@@ -1,6 +1,6 @@
 import { rateLimit } from "express-rate-limit";
 
-export let configGet = () => {
+let configGet = () => {
     return rateLimit({
         windowMs: 2 * 1000,
         max: 5,
@@ -23,6 +23,10 @@ export let configGet = () => {
 
         }
     })
+}
+
+export {
+    configGet
 }
 
 // X-RateLimit
