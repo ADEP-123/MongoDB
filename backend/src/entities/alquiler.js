@@ -98,8 +98,6 @@ class Alquiler {
     async getRentValue(id) {
         try {
             const coleccion = await collectionGen("alquiler");
-            console.log("Coleccion: ", coleccion);
-
             const pipeline = [
                 {
                     $match: {

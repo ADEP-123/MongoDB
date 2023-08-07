@@ -67,15 +67,16 @@ const getRentController = async (req, res, next) => {
                 case "false":
                     result = await getRentBydIdService(Number(id))
                     break;
-
-                default:
-                    res.status(400).json({ message: "El tipo de dato ingresado al costo es incorrecto" });
-                    break;
             }
         } else {
             result = await getRentBydIdService(Number(id));
         }
-        res.status(200).json({ message: `Se han encontrado ${result.length} resultados`, result });
+        if (cost != "true" && cost != "false") {
+            res.status(400).json({ message: "El tipo de dato ingresado al costo es incorrecto" });
+        } else {
+            res.status(200).json({ message: `Se han encontrado ${result.length} resultados`, result });
+        }
+
     } catch (error) {
         res.status(500).json(error);
     }
