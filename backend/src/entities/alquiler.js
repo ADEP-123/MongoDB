@@ -193,6 +193,29 @@ class Alquiler {
             throw error;
         }
     }
+
+    async getRentsAmount() {
+        try {
+            const coleccion = await collectionGen("alquiler");
+            // console.log("Coleccion: ", coleccion);
+            return coleccion.aggregate([
+                {
+                    $group: {
+                        _id: null,
+                        cantidad_registros: { $sum: 1 }
+                    }
+                },
+                {
+                    $project: {
+                        _id: 0,
+                        cantidad_registros: 1
+                    }
+                }
+            ]).toArray();
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 export default Alquiler;

@@ -57,68 +57,68 @@ Ejercicio practico para aprendizaje de mongo, se creo una base de datos simuland
 
 1. Mostrar todos los clientes registrados en la base de datos.
 
-    - URL: http://127.10.10.10:5010/campus/get/cliente
-    - Método: GET
-    - Lectura de Datos:
-    - Ejemplo: http://127.10.10.10:5010/campus/get/cliente
+   - URL: http://127.10.10.10:5010/campus/get/cliente
+   - Método: GET
+   - Lectura de Datos:
+   - Ejemplo: http://127.10.10.10:5010/campus/get/cliente
 
 2. Obtener todos los automóviles disponibles para alquiler.
 
-    - URL: http://127.10.10.10:5010/campus/get/sucursal_automovil/vehicLibre
-    - Método: GET
-    - Lectura de Datos:
-    - Ejemplo: http://127.10.10.10:5010/campus/get/sucursal_automovil/vehicLibre
+   - URL: http://127.10.10.10:5010/campus/get/sucursal_automovil/vehicLibre
+   - Método: GET
+   - Lectura de Datos:
+   - Ejemplo: http://127.10.10.10:5010/campus/get/sucursal_automovil/vehicLibre
 
 3. Listar todos los alquileres activos junto con los datos de los clientes relacionados.
 
-    - URL: http://127.10.10.10:5010/campus/get/alquilerActivo
-    - Método: GET
-    - Lectura de Datos:
-    - Ejemplo: http://127.10.10.10:5010/campus/get/alquilerActivo
+   - URL: http://127.10.10.10:5010/campus/get/alquilerActivo
+   - Método: GET
+   - Lectura de Datos:
+   - Ejemplo: http://127.10.10.10:5010/campus/get/alquilerActivo
 
 4. Mostrar todas las reservas pendientes con los datos del cliente y el automóvil reservado.
 
-    - URL: http://127.10.10.10:5010/campus/get/reserva
-    - Método: GET
-    - Lectura de Datos:
-    - Ejemplo: http://127.10.10.10:5010/campus/get/reserva
+   - URL: http://127.10.10.10:5010/campus/get/reserva
+   - Método: GET
+   - Lectura de Datos:
+   - Ejemplo: http://127.10.10.10:5010/campus/get/reserva
 
 5. Obtener los detalles del alquiler con el ID_Alquiler específico.
 
-    - URL: http://127.10.10.10:5010/campus/get/alquiler
-    - Método: GET
-    - Lectura de Datos: query
-    - Ejemplo: http://127.10.10.10:5010/campus/get/alquiler?id=2
+   - URL: http://127.10.10.10:5010/campus/get/alquiler
+   - Método: GET
+   - Lectura de Datos: query
+   - Ejemplo: http://127.10.10.10:5010/campus/get/alquiler?id=2
 
 6. Listar los empleados con el cargo de "Vendedor".
 
-    - URL: http://127.10.10.10:5010/campus/get/empleado?Cargo=Vendedor
-    - Método: GET
-    - Lectura de Datos: query
-    - Ejemplo: http://127.10.10.10:5010/campus/get/empleado?Cargo=Vendedor
-    - Nota: debido a las necesidades estrictas de la consulta los unicos cargos a consultar son Asistente, Gerente o Vendedor, en caso de ingresar Asistente o Gerente obtendra tanto asistentes como gerentes
+   - URL: http://127.10.10.10:5010/campus/get/empleado?Cargo=Vendedor
+   - Método: GET
+   - Lectura de Datos: query
+   - Ejemplo: http://127.10.10.10:5010/campus/get/empleado?Cargo=Vendedor
+   - Nota: debido a las necesidades estrictas de la consulta los unicos cargos a consultar son Asistente, Gerente o Vendedor, en caso de ingresar Asistente o Gerente obtendra tanto asistentes como gerentes
 
 7. Mostrar la cantidad total de automóviles disponibles en cada sucursal.
 
-    - URL: http://127.10.10.10:5010/campus/get/vehiculosEnSucursal
-    - Método: GET
-    - Lectura de Datos:
-    - Ejemplo: http://127.10.10.10:5010/campus/get/vehiculosEnSucursal
+   - URL: http://127.10.10.10:5010/campus/get/vehiculosEnSucursal
+   - Método: GET
+   - Lectura de Datos:
+   - Ejemplo: http://127.10.10.10:5010/campus/get/vehiculosEnSucursal
 
 8. Obtener el costo total de un alquiler específico.
 
-    - URL: http://127.10.10.10:5010/campus/get/alquiler
-    - Método: GET
-    - Lectura de Datos: query
-    - Ejemplo: http://127.10.10.10:5010/campus/get/alquiler?id=1&cost=true
-    - Nota: El valor cost es un booleano que puede ser true o false, en caso de ser falso devolvera la informacion de dicho alquiler unicamente
+   - URL: http://127.10.10.10:5010/campus/get/alquiler
+   - Método: GET
+   - Lectura de Datos: query
+   - Ejemplo: http://127.10.10.10:5010/campus/get/alquiler?id=1&cost=true
+   - Nota: El valor cost es un booleano que puede ser true o false, en caso de ser falso devolvera la informacion de dicho alquiler unicamente
 
 9. Listar los clientes con el DNI específico.
 
-    - URL: http://127.10.10.10:5010/campus/get/cliente
-    - Método: GET
-    - Lectura de Datos: query
-    - Ejemplo: http://127.10.10.10:5010/campus/get/cliente?document=1098817776
+   - URL: http://127.10.10.10:5010/campus/get/cliente
+   - Método: GET
+   - Lectura de Datos: query
+   - Ejemplo: http://127.10.10.10:5010/campus/get/cliente?document=1098817776
 
 10. Mostrar todos los automóviles con una capacidad mayor a 5 personas.
 
@@ -163,7 +163,7 @@ Ejercicio practico para aprendizaje de mongo, se creo una base de datos simuland
 
     - URL: http://127.10.10.10:5010/campus/get/automovil
     - Método: GET
-    - Lectura de Datos: 
+    - Lectura de Datos:
     - Ejemplo: http://127.10.10.10:5010/campus/get/automovil
 
 16. Mostrar la cantidad total de automóviles en cada sucursal junto con su dirección.
@@ -172,7 +172,15 @@ Ejercicio practico para aprendizaje de mongo, se creo una base de datos simuland
     - Método: GET
     - Lectura de Datos: query
     - Ejemplo: http://127.10.10.10:5010/campus/get/vehiculosEnSucursal?Address=true
-    - Nota: Address es un parametro que solo recibira valores booleanos true o false y unicamente la informacion de las sucursales detalladas si este valor es true
+    - Nota: Address es un parametro que solo recibira valores booleanos true o false y unicamente mostrara la informacion de las sucursales detalladas si este valor es true
+
+17. Obtener la cantidad total de alquileres registrados en la base de datos.
+
+    - URL: http://127.10.10.10:5010/campus/get/alquiler
+    - Método: GET
+    - Lectura de Datos: query
+    - Ejemplo: http://127.10.10.10:5010/campus/get/alquiler?amount=true
+    - Nota: amount es un parametro que solo recibira valores booleanos true o false y unicamente mostrara el total de alquileres en la base de datos si este valor es true 
 
 #.
 

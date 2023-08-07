@@ -1,4 +1,4 @@
-import { getAllActiveRentsAndClientsService, getAllBookinsService, getAllClientsService, getAllFreeVehiclesService, getAllSucursalService, getAllVehiclesSortedService, getBookingsByClientID, getClientByDocumentService, getClientsWhoRentedService, getManagerOrAssistantService, getRentBydIdService, getRentValueService, getRentsOnDateService, getSellerService, getVehiclesMore5PeopleService, getVehiclesOnSucursalAndAddressService, getVehiclesOnSucursalService } from "../services/getServices.js";
+import { getAllActiveRentsAndClientsService, getAllBookinsService, getAllClientsService, getAllFreeVehiclesService, getAllSucursalService, getAllVehiclesSortedService, getBookingsByClientID, getClientByDocumentService, getClientsWhoRentedService, getManagerOrAssistantService, getRentBydIdService, getRentValueService, getRentsAmountService, getRentsOnDateService, getSellerService, getVehiclesMore5PeopleService, getVehiclesOnSucursalAndAddressService, getVehiclesOnSucursalService } from "../services/getServices.js";
 
 const getSucursalController = async (req, res, next) => {
     if (!req.rateLimit) return;
@@ -70,7 +70,7 @@ const getBookinsController = async (req, res, next) => {
 
 const getRentController = async (req, res, next) => {
     if (!req.rateLimit) return;
-    const { id, cost, startingDate } = req.query
+    const { id, cost, startingDate, amount } = req.query
     try {
         let result;
         if (cost) {
@@ -87,7 +87,11 @@ const getRentController = async (req, res, next) => {
             if (startingDate == '2023-09-01') {
                 result = await getRentsOnDateService();
             } else {
-                result = await getRentBydIdService(Number(id));
+                if (amount) {
+                    result = await getRentsAmountService();
+                } else {
+                    result = await getRentBydIdService(Number(id));
+                }
             }
         }
         if (cost != "true" && cost != "false" && cost) {
