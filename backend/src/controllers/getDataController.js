@@ -1,4 +1,4 @@
-import { getAllClientsService, getAllSucursalService } from "../services/getServices.js";
+import { getAllClientsService, getAllFreeVehiclesService, getAllSucursalService } from "../services/getServices.js";
 
 const getSucursalController = async (req, res, next) => {
     if (!req.rateLimit) return;
@@ -22,7 +22,18 @@ const getClientsController = async (req, res, next) => {
 };
 
 
+const getAllFreeVehiclesController = async (req, res, next) => {
+    if (!req.rateLimit) return;
+    try {
+        const result = await getAllFreeVehiclesService();
+        res.status(200).json({ message: `Se han encontrado ${result.length} resultados`, result });
+    } catch (error) {
+        res.status(500).json(error);
+    }
+};
+
 export {
     getSucursalController,
-    getClientsController
+    getClientsController,
+    getAllFreeVehiclesController
 }
