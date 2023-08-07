@@ -90,6 +90,13 @@ Ejercicio practico para aprendizaje de mongo, se creo una base de datos simuland
    - Lectura de Datos: query
    - Ejemplo: http://127.10.10.10:5010/campus/get/alquiler?id=2
 
+6. Listar los empleados con el cargo de "Vendedor".
+
+   - URL: http://127.10.10.10:5010/campus/get/empleado?Cargo=Vendedor
+   - Método: GET
+   - Lectura de Datos: query
+   - Ejemplo: http://127.10.10.10:5010/campus/get/empleado?Cargo=Vendedor
+
 #.
 
 - URL: http://127.10.10.10:5010/campus/get/sucursal
