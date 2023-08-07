@@ -1,3 +1,4 @@
+import Cliente from "../entities/cliente.js";
 import Sucursal from "../entities/surcursal.js";
 
 const getAllSucursalService = async (id) => {
@@ -5,6 +6,14 @@ const getAllSucursalService = async (id) => {
     const result = await sucursal.getAllSucursal()
     return result;
 };
+
+const getAllClientsService = async () => {
+    const cliente = new Cliente();
+    const result = await cliente.getAllCLients();
+    return result;
+};
+
 export {
-    getAllSucursalService
+    getAllSucursalService,
+    getAllClientsService
 }

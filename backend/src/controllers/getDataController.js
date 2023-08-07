@@ -1,4 +1,4 @@
-import { getAllSucursalService } from "../services/getServices.js";
+import { getAllClientsService, getAllSucursalService } from "../services/getServices.js";
 
 const getSucursalController = async (req, res, next) => {
     if (!req.rateLimit) return;
@@ -10,6 +10,19 @@ const getSucursalController = async (req, res, next) => {
         res.status(500).json(error);
     }
 };
+
+const getClientsController = async (req, res, next) => {
+    if (!req.rateLimit) return;
+    try {
+        const result = await getAllClientsService();
+        res.status(200).json({ message: `Se han encontrado ${result.length} resultados`, result });
+    } catch (error) {
+        res.status(500).json(error);
+    }
+};
+
+
 export {
-    getSucursalController
+    getSucursalController,
+    getClientsController
 }
