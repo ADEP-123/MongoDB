@@ -20,8 +20,28 @@ class Alquiler {
     async getRentBydId(id) {
         try {
             const coleccion = await collectionGen("alquiler");
-            //console.log("Coleccion: ", coleccion);
-            return coleccion.find({ ID_Alquiler: { $eq: id } }, { ID: "$ID_Alquiler", Client: "$cliente_id", Vehicle: "$automovil_id", Start: "$Fecha_Inicio", End: "$Fecha_Fin", Cost: "$Costo_Total", Status: "$Estado" }).toArray();
+            console.log("Coleccion: ", coleccion);
+
+            const pipeline = [
+                {
+                    $match: {
+                        ID_Alquiler: id
+                    }
+                },
+                {
+                    $project: {
+                        ID: "$ID_Alquiler",
+                        Client: "$cliente_id",
+                        Vehicle: "$automovil_id",
+                        Start: "$Fecha_Inicio",
+                        End: "$Fecha_Fin",
+                        Cost: "$Costo_Total",
+                        Status: "$Estado",
+                        _id: 0
+                    }
+                }
+            ];
+            return coleccion.aggregate(pipeline).toArray();
         } catch (error) {
             throw error;
         }
