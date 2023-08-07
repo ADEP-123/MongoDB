@@ -112,6 +112,13 @@ Ejercicio practico para aprendizaje de mongo, se creo una base de datos simuland
    - Ejemplo: http://127.10.10.10:5010/campus/get/alquiler?id=1&cost=true
    - Nota: El valor cost es un booleano que puede ser true o false, en caso de ser falso devolvera la informacion de dicho alquiler unicamente
 
+9. Listar los clientes con el DNI específico.
+
+   - URL: http://127.10.10.10:5010/campus/get/cliente
+   - Método: GET
+   - Lectura de Datos: query
+   - Ejemplo: http://127.10.10.10:5010/campus/get/cliente?document=1098817776
+
 #.
 
 - URL: http://127.10.10.10:5010/campus/get/sucursal

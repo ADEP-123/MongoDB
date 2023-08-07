@@ -59,6 +59,13 @@ const getRentValueService = async (id) => {
     return result;
 };
 
+const getClientByDocumentService = async (document) => {
+    const cliente = new Cliente();
+    const result = await cliente.getClientByDocument(document);
+    return result;
+};
+
+
 export {
     getAllSucursalService,
     getAllClientsService,
@@ -68,5 +75,6 @@ export {
     getRentBydIdService,
     getSellerService,
     getVehiclesOnSucursalService,
-    getRentValueService
+    getRentValueService,
+    getClientByDocumentService
 }

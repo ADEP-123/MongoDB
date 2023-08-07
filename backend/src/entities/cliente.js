@@ -8,10 +8,14 @@ class Cliente {
     Direccion;
     Telefono;
     Email;
-    constructor(ID, Name, Lastname) {
+    constructor(ID, name, lastname, document, address, phone, email) {
         this.ID_Cliente = ID;
-        this.Nombre = Name;
-        this.Apellido = Lastname;
+        this.Nombre = name;
+        this.Apellido = lastname;
+        this. DNI = document;
+        this. Direccion = address;
+        this. Telefono = phone;
+        this. Email = email;
     }
 
     // async getAllCLients() {
@@ -40,6 +44,32 @@ class Cliente {
                 }
             ];
     
+            return coleccion.aggregate(pipeline).toArray();
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async getClientByDocument(document) {
+        try {
+            const coleccion = await collectionGen("cliente");
+            //console.log("Coleccion: ", coleccion);
+    
+            const pipeline = [
+                {
+                    $match: {
+                        DNI: document
+                    }
+                },
+                {
+                    $project: {
+                        ID: "$ID_Cliente",
+                        Name: "$Nombre",
+                        LastName: "$Apellido",
+                        "_id": 0 
+                    }
+                }
+            ];
             return coleccion.aggregate(pipeline).toArray();
         } catch (error) {
             throw error;
