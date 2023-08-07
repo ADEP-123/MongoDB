@@ -76,6 +76,13 @@ Ejercicio practico para aprendizaje de mongo, se creo una base de datos simuland
    - Lectura de Datos:
    - Ejemplo: http://127.10.10.10:5010/campus/get/alquilerActivo
 
+4. Mostrar todas las reservas pendientes con los datos del cliente y el automóvil reservado..
+
+   - URL: http://127.10.10.10:5010/campus/get/reserva
+   - Método: GET
+   - Lectura de Datos:
+   - Ejemplo: http://127.10.10.10:5010/campus/get/reserva
+
 #. 
 
    - URL: http://127.10.10.10:5010/campus/get/sucursal
