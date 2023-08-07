@@ -38,11 +38,35 @@ class Automovil {
                         Type: "$Tipo",
                         Precio: "$Precio_Diario",
                         Capacity: "$Capacidad",
-                        _id: 0 
+                        _id: 0
                     }
                 }
             ];
             return coleccion.aggregate(pipeline).toArray();
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async getAllVehiclesSorted() {
+        try {
+            const coleccion = await collectionGen("automovil");
+            //console.log("Coleccion: ", coleccion);
+
+            const pipeline = [
+                {
+                    $project: {
+                        ID: "$ID_Automovil",
+                        Brand: "$Marca",
+                        Model: "$Modelo",
+                        Year: "$anio",
+                        Type: "$Tipo",
+                        Precio: "$Precio_Diario",
+                        _id: 0
+                    }
+                }
+            ];
+            return coleccion.aggregate(pipeline).sort({ Brand: 1, Model: 1 }).toArray();
         } catch (error) {
             throw error;
         }

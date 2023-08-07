@@ -159,6 +159,13 @@ Ejercicio practico para aprendizaje de mongo, se creo una base de datos simuland
     - Ejemplo: http://127.10.10.10:5010/campus/get/cliente?rented=true
     - Nota: rented es un parametro que solo recibira valores booleanos true o false y unicamente devolvera aquellos clientes que hayan realizado almenos un alquiler si este valor es true
 
+15. Listar todos los automóviles ordenados por marca y modelo.
+
+    - URL: http://127.10.10.10:5010/campus/get/automovil
+    - Método: GET
+    - Lectura de Datos: 
+    - Ejemplo: http://127.10.10.10:5010/campus/get/automovil
+
 #.
 
     - URL: http://127.10.10.10:5010/campus/get/sucursal

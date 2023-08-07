@@ -1,4 +1,4 @@
-import { getAllActiveRentsAndClientsService, getAllBookinsService, getAllClientsService, getAllFreeVehiclesService, getAllSucursalService, getBookingsByClientID, getClientByDocumentService, getClientsWhoRentedService, getManagerOrAssistantService, getRentBydIdService, getRentValueService, getRentsOnDateService, getSellerService, getVehiclesMore5PeopleService, getVehiclesOnSucursalService } from "../services/getServices.js";
+import { getAllActiveRentsAndClientsService, getAllBookinsService, getAllClientsService, getAllFreeVehiclesService, getAllSucursalService, getAllVehiclesSortedService, getBookingsByClientID, getClientByDocumentService, getClientsWhoRentedService, getManagerOrAssistantService, getRentBydIdService, getRentValueService, getRentsOnDateService, getSellerService, getVehiclesMore5PeopleService, getVehiclesOnSucursalService } from "../services/getServices.js";
 
 const getSucursalController = async (req, res, next) => {
     if (!req.rateLimit) return;
@@ -142,6 +142,8 @@ const getVehiclesController = async (req, res, next) => {
         let result;
         if (Capacidad == 5) {
             result = await getVehiclesMore5PeopleService();
+        } else{
+            result = await getAllVehiclesSortedService();
         }
         res.status(200).json({ message: `se han encontrado ${result.length} resultados`, result })
     } catch (error) {
