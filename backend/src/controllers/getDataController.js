@@ -1,4 +1,4 @@
-import { getAllActiveRentsAndClientsService, getAllBookinsService, getAllClientsService, getAllFreeVehiclesService, getAllSucursalService, getAllVehiclesSortedService, getBookingsByClientID, getClientByDocumentService, getClientsWhoRentedService, getManagerOrAssistantService, getRentBydIdService, getRentValueService, getRentsAmountService, getRentsOnDateService, getSellerService, getVehiclesMore5PeopleService, getVehiclesOnSucursalAndAddressService, getVehiclesOnSucursalService } from "../services/getServices.js";
+import { getAllActiveRentsAndClientsService, getAllBookinsService, getAllClientsService, getAllFreeVehiclesService, getAllSucursalService, getAllVehiclesSortedService, getBookingsByClientID, getClientByDocumentService, getClientsWhoRentedService, getManagerOrAssistantService, getRentBydIdService, getRentValueService, getRentsAmountService, getRentsOnDateService, getSellerService, getVehicles5PeopleAvailableService, getVehiclesMore5PeopleService, getVehiclesOnSucursalAndAddressService, getVehiclesOnSucursalService } from "../services/getServices.js";
 
 const getSucursalController = async (req, res, next) => {
     if (!req.rateLimit) return;
@@ -147,11 +147,15 @@ const getVehiclesOnSucursalController = async (req, res, next) => {
 
 const getVehiclesController = async (req, res, next) => {
     if (!req.rateLimit) return;
-    const { Capacidad } = req.query
+    const { Capacidad, Disponible } = req.query
     try {
         let result;
         if (Capacidad == 5) {
-            result = await getVehiclesMore5PeopleService();
+            if(Disponible == "true"){
+                result = await getVehicles5PeopleAvailableService();
+            } else {
+                result = await getVehiclesMore5PeopleService();
+            }
         } else {
             result = await getAllVehiclesSortedService();
         }

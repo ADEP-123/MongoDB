@@ -374,7 +374,41 @@ db.alquiler.aggregate([
 // 18. Mostrar los automóviles con capacidad igual a 5 personas y que estén disponibles.
 // db.alquiler.countDocuments({});
 use("db_campus_alquiler");
-db.automovil.find({ $and: [{ Capacidad: { $eq: 5 } }, { Estado: { $eq: "Disponible" } }] }, { ID: "$ID_Automovil", Brand: "$Marca", Model: "$Modelo", Year: "$anio", Type: "$Tipo", Precio: "$Precio_Diario", "_id": 0 });
+db.automovil.aggregate([
+    {
+        $match: {
+            Capacidad: 5
+        }
+    },
+    {
+        $lookup: {
+            from: "sucursal_automovil",
+            localField: "ID_Automovil",
+            foreignField: "automovil_id",
+            as: "sucursal_info"
+        }
+    },
+    {
+        $unwind: "$sucursal_info"
+    },
+    {
+        $match: {
+            "sucursal_info.Cantidad_Disponible": { $gt: 0 }
+        }
+    },
+    {
+        $project: {
+            _id: 0,
+            ID_Automovil: "$ID_Automovil",
+            Marca: "$Marca",
+            Modelo: "$Modelo",
+            Anio: "$Anio",
+            Tipo: "$Tipo",
+            Capacidad: "$Capacidad",
+            Precio_Diario: "$Precio_Diario"
+        }
+    }
+]);
 
 // 19.Obtener los datos del cliente que realizó la reserva con ID_Reserva específico.
 use("db_campus_alquiler");

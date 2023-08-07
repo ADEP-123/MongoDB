@@ -182,6 +182,14 @@ Ejercicio practico para aprendizaje de mongo, se creo una base de datos simuland
     - Ejemplo: http://127.10.10.10:5010/campus/get/alquiler?amount=true
     - Nota: amount es un parametro que solo recibira valores booleanos true o false y unicamente mostrara el total de alquileres en la base de datos si este valor es true 
 
+18. Mostrar los automóviles con capacidad igual a 5 personas y que estén disponibles.
+
+    - URL: http://127.10.10.10:5010/campus/get/automovil
+    - Método: GET
+    - Lectura de Datos: query
+    - Ejemplo: http://127.10.10.10:5010/campus/get/automovil?Capacidad=5&Disponible=true
+    - Nota: Disponible es un parametro que solo recibira valores booleanos true o false y unicamente mostrara el los automoviles que tengan capacidad igual a 5 personas y esten disponibles si estos dos parametros se encuentran tal cual en la query
+
 #.
 
     - URL: http://127.10.10.10:5010/campus/get/sucursal
