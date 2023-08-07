@@ -1,4 +1,4 @@
-import { getAllClientsService, getAllFreeVehiclesService, getAllSucursalService } from "../services/getServices.js";
+import { getAllActiveRentsAndClientsService, getAllClientsService, getAllFreeVehiclesService, getAllSucursalService } from "../services/getServices.js";
 
 const getSucursalController = async (req, res, next) => {
     if (!req.rateLimit) return;
@@ -32,8 +32,19 @@ const getAllFreeVehiclesController = async (req, res, next) => {
     }
 };
 
+const getAllActiveRentsAndClientsController = async (req, res, next) => {
+    if (!req.rateLimit) return;
+    try {
+        const result = await getAllActiveRentsAndClientsService();
+        res.status(200).json({ message: `Se han encontrado ${result.length} resultados`, result });
+    } catch (error) {
+        res.status(500).json(error);
+    }
+};
+
 export {
     getSucursalController,
     getClientsController,
-    getAllFreeVehiclesController
+    getAllFreeVehiclesController,
+    getAllActiveRentsAndClientsController
 }

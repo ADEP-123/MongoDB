@@ -27,7 +27,7 @@ class Cliente {
     async getAllCLients() {
         try {
             const coleccion = await collectionGen("cliente");
-            console.log("Coleccion: ", coleccion);
+            //console.log("Coleccion: ", coleccion);
     
             const pipeline = [
                 {

@@ -1,3 +1,4 @@
+import Alquiler from "../entities/alquiler.js";
 import Cliente from "../entities/cliente.js";
 import Sucursal_Automovil from "../entities/sucursal_automovil.js";
 import Sucursal from "../entities/surcursal.js";
@@ -20,8 +21,15 @@ const getAllFreeVehiclesService = async () => {
     return result;
 };
 
+const getAllActiveRentsAndClientsService = async () => {
+    const alquiler = new Alquiler();
+    const result = await alquiler.getAllActiveRentsAndClients();
+    return result;
+};
+
 export {
     getAllSucursalService,
     getAllClientsService,
-    getAllFreeVehiclesService
+    getAllFreeVehiclesService,
+    getAllActiveRentsAndClientsService
 }
