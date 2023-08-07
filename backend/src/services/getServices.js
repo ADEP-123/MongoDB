@@ -90,6 +90,12 @@ const getManagerOrAssistantService = async () => {
     return result;
 };
 
+const getClientsWhoRentedService = async () => {
+    const alquiler = new Alquiler();
+    const result = await alquiler.getClientsWhoRented();
+    return result;
+};
+
 export {
     getAllSucursalService,
     getAllClientsService,
@@ -104,5 +110,6 @@ export {
     getVehiclesMore5PeopleService,
     getRentsOnDateService,
     getBookingsByClientID,
-    getManagerOrAssistantService
+    getManagerOrAssistantService,
+    getClientsWhoRentedService
 }

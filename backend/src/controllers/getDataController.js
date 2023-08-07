@@ -1,4 +1,4 @@
-import { getAllActiveRentsAndClientsService, getAllBookinsService, getAllClientsService, getAllFreeVehiclesService, getAllSucursalService, getBookingsByClientID, getClientByDocumentService, getManagerOrAssistantService, getRentBydIdService, getRentValueService, getRentsOnDateService, getSellerService, getVehiclesMore5PeopleService, getVehiclesOnSucursalService } from "../services/getServices.js";
+import { getAllActiveRentsAndClientsService, getAllBookinsService, getAllClientsService, getAllFreeVehiclesService, getAllSucursalService, getBookingsByClientID, getClientByDocumentService, getClientsWhoRentedService, getManagerOrAssistantService, getRentBydIdService, getRentValueService, getRentsOnDateService, getSellerService, getVehiclesMore5PeopleService, getVehiclesOnSucursalService } from "../services/getServices.js";
 
 const getSucursalController = async (req, res, next) => {
     if (!req.rateLimit) return;
@@ -12,13 +12,17 @@ const getSucursalController = async (req, res, next) => {
 
 const getClientsController = async (req, res, next) => {
     if (!req.rateLimit) return;
-    const { document } = req.query
+    const { document, rented } = req.query
     try {
         let result;
         if (document) {
             result = await getClientByDocumentService(document);
         } else {
-            result = await getAllClientsService();
+            if (rented == "true") {
+                result = await getClientsWhoRentedService();
+            } else {
+                result = await getAllClientsService();
+            }
         }
         res.status(200).json({ message: `Se han encontrado ${result.length} resultados`, result });
     } catch (error) {

@@ -151,6 +151,14 @@ Ejercicio practico para aprendizaje de mongo, se creo una base de datos simuland
     - Ejemplo: http://127.10.10.10:5010/campus/get/empleado?Cargo=Asistente
     - Nota: debido a las necesidades estrictas de la consulta los unicos cargos a consultar son Asistente, Gerente o Vendedor, en caso de ingresar Asistente o Gerente obtendra tanto asistentes como gerentes
 
+14. Obtener los datos de los clientes que realizaron al menos un alquiler.
+
+    - URL: http://127.10.10.10:5010/campus/get/cliente
+    - Método: GET
+    - Lectura de Datos: query
+    - Ejemplo: http://127.10.10.10:5010/campus/get/cliente?rented=true
+    - Nota: rented es un parametro que solo recibira valores booleanos true o false y unicamente devolvera aquellos clientes que hayan realizado almenos un alquiler si este valor es true
+
 #.
 
     - URL: http://127.10.10.10:5010/campus/get/sucursal

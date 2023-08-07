@@ -17,6 +17,7 @@ class Alquiler {
         this.Costo_Total = totalCost;
         this.Estado = status;
     }
+
     async getRentBydId(id) {
         try {
             const coleccion = await collectionGen("alquiler");
@@ -141,6 +142,53 @@ class Alquiler {
                 }
             ];
             return coleccion.aggregate(pipeline).toArray();
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async getClientsWhoRented() {
+        try {
+            const coleccion = await collectionGen("alquiler");
+            // console.log("Coleccion: ", coleccion);
+            return coleccion.aggregate([
+                {
+                    $lookup: {
+                        from: "cliente",
+                        localField: "cliente_id",
+                        foreignField: "ID_Cliente",
+                        as: "cliente_info"
+                    }
+                },
+                {
+                    $unwind: "$cliente_info"
+                },
+                {
+                    $group: {
+                        _id: "$cliente_id",
+                        cliente_info: { $first: "$cliente_info" },
+                        alquileres: {
+                            $push: {
+                                ID_Alquiler: "$ID_Alquiler",
+                                Fecha_Inicio: "$Fecha_Inicio",
+                                Fecha_Fin: "$Fecha_Fin",
+                                Estado: "$Estado"
+                            }
+                        }
+                    }
+                },
+                {
+                    $project: {
+                        "cliente_info": 1,
+                        "totalAlquileres": { $size: "$alquileres" },
+                    }
+                },
+                {
+                    $match: {
+                        "totalAlquileres": { $gte: 1 }
+                    }
+                }
+            ]).toArray();
         } catch (error) {
             throw error;
         }
