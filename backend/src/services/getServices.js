@@ -34,10 +34,17 @@ const getAllBookinsService = async () => {
     return result;
 };
 
+const getRentBydIdService = async (id) => {
+    const alquiler = new Alquiler();
+    const result = await alquiler.getRentBydId(id);
+    return result;
+};
+
 export {
     getAllSucursalService,
     getAllClientsService,
     getAllFreeVehiclesService,
     getAllActiveRentsAndClientsService,
-    getAllBookinsService
+    getAllBookinsService,
+    getRentBydIdService
 }

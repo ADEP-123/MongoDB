@@ -17,6 +17,15 @@ class Alquiler {
         this.Costo_Total = totalCost;
         this.Estado = status;
     }
+    async getRentBydId(id) {
+        try {
+            const coleccion = await collectionGen("alquiler");
+            //console.log("Coleccion: ", coleccion);
+            return coleccion.find({ ID_Alquiler: { $eq: id } }, { ID: "$ID_Alquiler", Client: "$cliente_id", Vehicle: "$automovil_id", Start: "$Fecha_Inicio", End: "$Fecha_Fin", Cost: "$Costo_Total", Status: "$Estado" }).toArray();
+        } catch (error) {
+            throw error;
+        }
+    }
 
     async getAllActiveRentsAndClients() {
         try {
@@ -65,6 +74,6 @@ class Alquiler {
             throw error;
         }
     }
-
 }
+
 export default Alquiler;
