@@ -72,6 +72,12 @@ const getVehiclesMore5PeopleService = async () => {
     return result;
 };
 
+const getRentsOnDateService = async () => {
+    const alquiler = new Alquiler();
+    const result = await alquiler.getRentsOnDate();
+    return result;
+};
+
 
 export {
     getAllSucursalService,
@@ -84,5 +90,6 @@ export {
     getVehiclesOnSucursalService,
     getRentValueService,
     getClientByDocumentService,
-    getVehiclesMore5PeopleService
+    getVehiclesMore5PeopleService,
+    getRentsOnDateService
 }

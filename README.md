@@ -127,6 +127,14 @@ Ejercicio practico para aprendizaje de mongo, se creo una base de datos simuland
 - Ejemplo: http://127.10.10.10:5010/campus/get/automovil?Capacidad=5
 - Nota: debido a las necesidades estrictas de la consulta la unica capacidad que se puede ingresar es 5
 
+11. Obtener los detalles del alquiler que tiene fecha de inicio en '2023 07 05'.
+
+- URL: http://127.10.10.10:5010/campus/get/alquiler
+- Método: GET
+- Lectura de Datos: query
+- Ejemplo: http://127.10.10.10:5010/campus/get/alquiler?startingDate=2023-09-01
+- Nota: debido a las necesidades estrictas de la consulta la unica fecha que se puede ingresar es 2023-09-01
+
 #.
 
 - URL: http://127.10.10.10:5010/campus/get/sucursal

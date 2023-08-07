@@ -1,4 +1,4 @@
-import { getAllActiveRentsAndClientsService, getAllBookinsService, getAllClientsService, getAllFreeVehiclesService, getAllSucursalService, getClientByDocumentService, getRentBydIdService, getRentValueService, getSellerService, getVehiclesMore5PeopleService, getVehiclesOnSucursalService } from "../services/getServices.js";
+import { getAllActiveRentsAndClientsService, getAllBookinsService, getAllClientsService, getAllFreeVehiclesService, getAllSucursalService, getClientByDocumentService, getRentBydIdService, getRentValueService, getRentsOnDateService, getSellerService, getVehiclesMore5PeopleService, getVehiclesOnSucursalService } from "../services/getServices.js";
 
 const getSucursalController = async (req, res, next) => {
     if (!req.rateLimit) return;
@@ -60,7 +60,7 @@ const getBookinsController = async (req, res, next) => {
 
 const getRentController = async (req, res, next) => {
     if (!req.rateLimit) return;
-
+    const { id, cost, startingDate } = req.query
     try {
         let result;
         if (cost) {
@@ -74,9 +74,13 @@ const getRentController = async (req, res, next) => {
                     break;
             }
         } else {
-            result = await getRentBydIdService(Number(id));
+            if (startingDate == '2023-09-01') {
+                result = await getRentsOnDateService();
+            } else {
+                result = await getRentBydIdService(Number(id));
+            }
         }
-        if (cost != "true" && cost != "false") {
+        if (cost != "true" && cost != "false" && cost) {
             res.status(400).json({ message: "El tipo de dato ingresado al costo es incorrecto" });
         } else {
             res.status(200).json({ message: `Se han encontrado ${result.length} resultados`, result });

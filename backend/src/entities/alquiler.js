@@ -108,7 +108,35 @@ class Alquiler {
                     $project: {
                         ID: "$ID_Alquiler",
                         Costo: "$Costo_Total",
-                        _id: 0 
+                        _id: 0
+                    }
+                }
+            ];
+            return coleccion.aggregate(pipeline).toArray();
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async getRentsOnDate() {
+        try {
+            const coleccion = await collectionGen("alquiler");
+            const pipeline = [
+                {
+                    $match: {
+                        Fecha_Inicio: { $eq: '2023-09-01' }
+                    }
+                },
+                {
+                    $project: {
+                        ID: "$ID_Alquiler",
+                        Client: "$cliente_id",
+                        Vehicle: "$automovil_id",
+                        Start: "$Fecha_Inicio",
+                        End: "$Fecha_Fin",
+                        Cost: "$Costo_Total",
+                        Status: "$Estado",
+                        _id: 0
                     }
                 }
             ];
