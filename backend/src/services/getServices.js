@@ -120,6 +120,12 @@ const getVehicles5PeopleAvailableService = async () => {
     return result;
 };
 
+const getClientInfoByBookingIDService = async (ID) => {
+    const reserva = new Reserva();
+    const result = await reserva.getClientInfoByBookingID(ID);
+    return result;
+};
+
 export {
     getAllSucursalService,
     getAllClientsService,
@@ -139,5 +145,6 @@ export {
     getAllVehiclesSortedService,
     getVehiclesOnSucursalAndAddressService,
     getRentsAmountService,
-    getVehicles5PeopleAvailableService
+    getVehicles5PeopleAvailableService,
+    getClientInfoByBookingIDService
 }

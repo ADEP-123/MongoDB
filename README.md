@@ -190,6 +190,14 @@ Ejercicio practico para aprendizaje de mongo, se creo una base de datos simuland
     - Ejemplo: http://127.10.10.10:5010/campus/get/automovil?Capacidad=5&Disponible=true
     - Nota: Disponible es un parametro que solo recibira valores booleanos true o false y unicamente mostrara el los automoviles que tengan capacidad igual a 5 personas y esten disponibles si estos dos parametros se encuentran tal cual en la query
 
+19. Obtener los datos del cliente que realizó la reserva con ID_Reserva específico
+
+    - URL: http://127.10.10.10:5010/campus/get/reserva
+    - Método: GET
+    - Lectura de Datos: query
+    - Ejemplo: http://127.10.10.10:5010/campus/get/reserva?ID=2
+    - Nota: debe colocar en la query el parametro ID tal cual seguido del id de la reserva de la cual desea conocer la informacion del cliente como se muestra en el ejemplo
+
 #.
 
     - URL: http://127.10.10.10:5010/campus/get/sucursal

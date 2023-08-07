@@ -1,4 +1,4 @@
-import { getAllActiveRentsAndClientsService, getAllBookinsService, getAllClientsService, getAllFreeVehiclesService, getAllSucursalService, getAllVehiclesSortedService, getBookingsByClientID, getClientByDocumentService, getClientsWhoRentedService, getManagerOrAssistantService, getRentBydIdService, getRentValueService, getRentsAmountService, getRentsOnDateService, getSellerService, getVehicles5PeopleAvailableService, getVehiclesMore5PeopleService, getVehiclesOnSucursalAndAddressService, getVehiclesOnSucursalService } from "../services/getServices.js";
+import { getAllActiveRentsAndClientsService, getAllBookinsService, getAllClientsService, getAllFreeVehiclesService, getAllSucursalService, getAllVehiclesSortedService, getBookingsByClientID, getClientByDocumentService, getClientInfoByBookingIDService, getClientsWhoRentedService, getManagerOrAssistantService, getRentBydIdService, getRentValueService, getRentsAmountService, getRentsOnDateService, getSellerService, getVehicles5PeopleAvailableService, getVehiclesMore5PeopleService, getVehiclesOnSucursalAndAddressService, getVehiclesOnSucursalService } from "../services/getServices.js";
 
 const getSucursalController = async (req, res, next) => {
     if (!req.rateLimit) return;
@@ -54,13 +54,17 @@ const getAllActiveRentsAndClientsController = async (req, res, next) => {
 
 const getBookinsController = async (req, res, next) => {
     if (!req.rateLimit) return;
-    const { clientId } = req.query
+    const { clientId , ID} = req.query
     try {
         let result;
         if (clientId) {
             result = await getBookingsByClientID(Number(clientId));
         } else {
-            result = await getAllBookinsService();
+            if(ID){
+                result = await getClientInfoByBookingIDService(Number(ID));
+            }else{
+                result = await getAllBookinsService();
+            }
         }
         res.status(200).json({ message: `Se han encontrado ${result.length} resultados`, result });
     } catch (error) {

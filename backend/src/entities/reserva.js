@@ -130,5 +130,45 @@ class Reserva {
         }
     }
 
+    async getClientInfoByBookingID(ID) {
+        try {
+            const coleccion = await collectionGen("reserva");
+            //console.log("Coleccion: ", coleccion);
+            return coleccion.aggregate([
+                { $match: { ID_Reserva: ID } },
+                {
+                    $lookup: {
+                        from: "cliente",
+                        localField: "cliente_id",
+                        foreignField: "ID_Cliente",
+                        as: "cliente_info"
+                    }
+                },
+                {
+                    $unwind: "$cliente_info"
+                },
+                {
+                    $project: {
+                        "_id": 0,
+                        "cliente_info": {
+                            "Document": "$cliente_info.DNI",
+                            "Name": "$cliente_info.Nombre",
+                            "Lastname": "$cliente_info.Apellido"
+                        },
+                        "reserva_info": {
+                            "ID": "$ID_Reserva",
+                            "BookingDate": "$Fecha_Reserva",
+                            "Start": "$Fecha_Inicio",
+                            "End": "$Fecha_Fin",
+                            "Status": "$Estado"
+                        }
+                    }
+                }
+            ]).toArray();
+        } catch (error) {
+            throw error;
+        }
+    }
+
 }
 export default Reserva;
