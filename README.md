@@ -101,7 +101,7 @@ Ejercicio practico para aprendizaje de mongo, se creo una base de datos simuland
 
    - URL: http://127.10.10.10:5010/campus/get/vehiculosEnSucursal
    - Método: GET
-   - Lectura de Datos: 
+   - Lectura de Datos:
    - Ejemplo: http://127.10.10.10:5010/campus/get/vehiculosEnSucursal
 
 8. Obtener el costo total de un alquiler específico.
@@ -118,6 +118,14 @@ Ejercicio practico para aprendizaje de mongo, se creo una base de datos simuland
    - Método: GET
    - Lectura de Datos: query
    - Ejemplo: http://127.10.10.10:5010/campus/get/cliente?document=1098817776
+
+10. Mostrar todos los automóviles con una capacidad mayor a 5 personas.
+
+- URL: http://127.10.10.10:5010/campus/get/automovil
+- Método: GET
+- Lectura de Datos: query
+- Ejemplo: http://127.10.10.10:5010/campus/get/automovil?Capacidad=5
+- Nota: debido a las necesidades estrictas de la consulta la unica capacidad que se puede ingresar es 5
 
 #.
 

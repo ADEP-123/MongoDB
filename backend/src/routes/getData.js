@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getAllActiveRentsAndClientsController, getAllFreeVehiclesController, getBookinsController, getClientsController, getEmployeController, getRentController, getSucursalController, getVehiclesOnSucursalController } from "../controllers/getDataController.js";
+import { getAllActiveRentsAndClientsController, getAllFreeVehiclesController, getBookinsController, getClientsController, getEmployeController, getRentController, getSucursalController, getVehiclesController, getVehiclesOnSucursalController } from "../controllers/getDataController.js";
 import { configGet } from "../middleware/limit.js";
 
 const getInitRoute = () => {
@@ -12,6 +12,7 @@ const getInitRoute = () => {
     router.get("/alquiler", configGet(), getRentController);
     router.get("/empleado", configGet(), getEmployeController);
     router.get("/vehiculosEnSucursal", configGet(), getVehiclesOnSucursalController);
+    router.get("/automovil", configGet(), getVehiclesController);
 
 
     return router;

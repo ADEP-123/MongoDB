@@ -1,4 +1,4 @@
-import { getAllActiveRentsAndClientsService, getAllBookinsService, getAllClientsService, getAllFreeVehiclesService, getAllSucursalService, getClientByDocumentService, getRentBydIdService, getRentValueService, getSellerService, getVehiclesOnSucursalService } from "../services/getServices.js";
+import { getAllActiveRentsAndClientsService, getAllBookinsService, getAllClientsService, getAllFreeVehiclesService, getAllSucursalService, getClientByDocumentService, getRentBydIdService, getRentValueService, getSellerService, getVehiclesMore5PeopleService, getVehiclesOnSucursalService } from "../services/getServices.js";
 
 const getSucursalController = async (req, res, next) => {
     if (!req.rateLimit) return;
@@ -111,6 +111,20 @@ const getVehiclesOnSucursalController = async (req, res, next) => {
     }
 };
 
+const getVehiclesController = async (req, res, next) => {
+    if (!req.rateLimit) return;
+    const { Capacidad } = req.query
+    try {
+        let result;
+        if (Capacidad == 5) {
+            result = await getVehiclesMore5PeopleService();
+        }
+        res.status(200).json({ message: `se han encontrado ${result.length} resultados`, result })
+    } catch (error) {
+        res.status(500).json(error);
+    }
+};
+
 export {
     getSucursalController,
     getClientsController,
@@ -119,5 +133,6 @@ export {
     getBookinsController,
     getRentController,
     getEmployeController,
-    getVehiclesOnSucursalController
+    getVehiclesOnSucursalController,
+    getVehiclesController
 }

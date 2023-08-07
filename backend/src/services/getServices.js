@@ -1,4 +1,5 @@
 import Alquiler from "../entities/alquiler.js";
+import Automovil from "../entities/automovil.js";
 import Cliente from "../entities/cliente.js";
 import Empleado from "../entities/empleado.js";
 import Reserva from "../entities/reserva.js";
@@ -65,6 +66,12 @@ const getClientByDocumentService = async (document) => {
     return result;
 };
 
+const getVehiclesMore5PeopleService = async () => {
+    const automovil = new Automovil();
+    const result = await automovil.getVehicles5Persons();
+    return result;
+};
+
 
 export {
     getAllSucursalService,
@@ -76,5 +83,6 @@ export {
     getSellerService,
     getVehiclesOnSucursalService,
     getRentValueService,
-    getClientByDocumentService
+    getClientByDocumentService,
+    getVehiclesMore5PeopleService
 }
