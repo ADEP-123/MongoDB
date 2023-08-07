@@ -54,6 +54,12 @@ const getVehiclesOnSucursalService = async () => {
     return result;
 };
 
+const getVehiclesOnSucursalAndAddressService = async () => {
+    const sucursal = new Sucursal()
+    const result = await sucursal.getVehiclesOnSucursalAndAddress()
+    return result;
+};
+
 const getRentValueService = async (id) => {
     const alquiler = new Alquiler()
     const result = await alquiler.getRentValue(id)
@@ -118,5 +124,6 @@ export {
     getBookingsByClientID,
     getManagerOrAssistantService,
     getClientsWhoRentedService,
-    getAllVehiclesSortedService
+    getAllVehiclesSortedService,
+    getVehiclesOnSucursalAndAddressService
 }

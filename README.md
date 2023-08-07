@@ -166,6 +166,14 @@ Ejercicio practico para aprendizaje de mongo, se creo una base de datos simuland
     - Lectura de Datos: 
     - Ejemplo: http://127.10.10.10:5010/campus/get/automovil
 
+16. Mostrar la cantidad total de automóviles en cada sucursal junto con su dirección.
+
+    - URL: http://127.10.10.10:5010/campus/get/vehiculosEnSucursal
+    - Método: GET
+    - Lectura de Datos: query
+    - Ejemplo: http://127.10.10.10:5010/campus/get/vehiculosEnSucursal?Address=true
+    - Nota: Address es un parametro que solo recibira valores booleanos true o false y unicamente la informacion de las sucursales detalladas si este valor es true
+
 #.
 
     - URL: http://127.10.10.10:5010/campus/get/sucursal
