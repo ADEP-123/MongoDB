@@ -46,6 +46,80 @@ class Empleado {
             throw error;
         }
     }
+
+    async getManagerOrAssistant() {
+        try {
+            const coleccion = await collectionGen("empleado");
+            //console.log("Coleccion: ", coleccion);
+
+            const pipeline = [
+                {
+                    $match: {
+                        Cargo: { $in: ["Gerente", "Asistente"] }
+                    }
+                },
+                {
+                    $group: {
+                        _id: null,
+                        Managers: {
+                            $push: {
+                                $cond: [
+                                    { $eq: ["$Cargo", "Gerente"] },
+                                    {
+                                        ID: "$ID_Empleado",
+                                        Name: "$Nombre",
+                                        Lastname: "$Apellido",
+                                        Document: "$DNI",
+                                        Address: "$Direccion",
+                                        Phone: "$Telefono"
+                                    },
+                                    null
+                                ]
+                            }
+                        },
+                        Assistants: {
+                            $push: {
+                                $cond: [
+                                    { $eq: ["$Cargo", "Asistente"] },
+                                    {
+                                        ID: "$ID_Empleado",
+                                        Name: "$Nombre",
+                                        Lastname: "$Apellido",
+                                        Document: "$DNI",
+                                        Address: "$Direccion",
+                                        Phone: "$Telefono"
+                                    },
+                                    null
+                                ]
+                            }
+                        }
+                    }
+                },
+                {
+                    $project: {
+                        _id: 0,
+                        Managers: {
+                            $filter: {
+                                input: "$Managers",
+                                as: "manager",
+                                cond: { $ne: ["$$manager", null] }
+                            }
+                        },
+                        Assistants: {
+                            $filter: {
+                                input: "$Assistants",
+                                as: "assistant",
+                                cond: { $ne: ["$$assistant", null] }
+                            }
+                        }
+                    }
+                }
+            ];
+            return coleccion.aggregate(pipeline).toArray();
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 export default Empleado;

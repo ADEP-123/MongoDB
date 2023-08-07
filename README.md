@@ -96,6 +96,7 @@ Ejercicio practico para aprendizaje de mongo, se creo una base de datos simuland
     - Método: GET
     - Lectura de Datos: query
     - Ejemplo: http://127.10.10.10:5010/campus/get/empleado?Cargo=Vendedor
+    - Nota: debido a las necesidades estrictas de la consulta los unicos cargos a consultar son Asistente, Gerente o Vendedor, en caso de ingresar Asistente o Gerente obtendra tanto asistentes como gerentes
 
 7. Mostrar la cantidad total de automóviles disponibles en cada sucursal.
 
@@ -141,6 +142,14 @@ Ejercicio practico para aprendizaje de mongo, se creo una base de datos simuland
     - Método: GET
     - Lectura de Datos: query
     - Ejemplo: http://127.10.10.10:5010/campus/get/reserva?clientId=1
+
+13. Mostrar los empleados con cargo de "Gerente" o "Asistente".
+
+    - URL: http://127.10.10.10:5010/campus/get/empleado
+    - Método: GET
+    - Lectura de Datos: query
+    - Ejemplo: http://127.10.10.10:5010/campus/get/empleado?Cargo=Asistente
+    - Nota: debido a las necesidades estrictas de la consulta los unicos cargos a consultar son Asistente, Gerente o Vendedor, en caso de ingresar Asistente o Gerente obtendra tanto asistentes como gerentes
 
 #.
 

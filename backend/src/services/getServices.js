@@ -84,6 +84,11 @@ const getBookingsByClientID = async (clientId) => {
     return result;
 };
 
+const getManagerOrAssistantService = async () => {
+    const empleado = new Empleado();
+    const result = await empleado.getManagerOrAssistant();
+    return result;
+};
 
 export {
     getAllSucursalService,
@@ -98,5 +103,6 @@ export {
     getClientByDocumentService,
     getVehiclesMore5PeopleService,
     getRentsOnDateService,
-    getBookingsByClientID
+    getBookingsByClientID,
+    getManagerOrAssistantService
 }
