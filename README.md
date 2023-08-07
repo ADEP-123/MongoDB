@@ -97,6 +97,13 @@ Ejercicio practico para aprendizaje de mongo, se creo una base de datos simuland
    - Lectura de Datos: query
    - Ejemplo: http://127.10.10.10:5010/campus/get/empleado?Cargo=Vendedor
 
+7. Mostrar la cantidad total de automóviles disponibles en cada sucursal.
+
+   - URL: http://127.10.10.10:5010/campus/get/vehiculosEnSucursal
+   - Método: GET
+   - Lectura de Datos: 
+   - Ejemplo: http://127.10.10.10:5010/campus/get/vehiculosEnSucursal
+
 #.
 
 - URL: http://127.10.10.10:5010/campus/get/sucursal

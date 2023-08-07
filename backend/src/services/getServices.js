@@ -5,8 +5,8 @@ import Reserva from "../entities/reserva.js";
 import Sucursal_Automovil from "../entities/sucursal_automovil.js";
 import Sucursal from "../entities/surcursal.js";
 
-const getAllSucursalService = async (id) => {
-    const sucursal = new Sucursal(id)
+const getAllSucursalService = async () => {
+    const sucursal = new Sucursal()
     const result = await sucursal.getAllSucursal()
     return result;
 };
@@ -47,6 +47,12 @@ const getSellerService = async () => {
     return result;
 };
 
+const getVehiclesOnSucursalService = async () => {
+    const sucursal = new Sucursal()
+    const result = await sucursal.getVehiclesOnSucursal()
+    return result;
+};
+
 export {
     getAllSucursalService,
     getAllClientsService,
@@ -54,5 +60,6 @@ export {
     getAllActiveRentsAndClientsService,
     getAllBookinsService,
     getRentBydIdService,
-    getSellerService
+    getSellerService,
+    getVehiclesOnSucursalService
 }
