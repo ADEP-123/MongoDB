@@ -78,6 +78,12 @@ const getRentsOnDateService = async () => {
     return result;
 };
 
+const getBookingsByClientID = async (clientId) => {
+    const reserva = new Reserva();
+    const result = await reserva.getBookinsByClient(clientId);
+    return result;
+};
+
 
 export {
     getAllSucursalService,
@@ -91,5 +97,6 @@ export {
     getRentValueService,
     getClientByDocumentService,
     getVehiclesMore5PeopleService,
-    getRentsOnDateService
+    getRentsOnDateService,
+    getBookingsByClientID
 }

@@ -81,5 +81,54 @@ class Reserva {
         }
     }
 
+    async getBookinsByClient(cliendId) {
+        try {
+            const coleccion = await collectionGen("reserva");
+            //console.log("Coleccion: ", coleccion);
+            return coleccion.aggregate([
+                { $match: { Estado: "Pendiente", cliente_id: cliendId } },
+                {
+                    $lookup: {
+                        from: "cliente",
+                        localField: "cliente_id",
+                        foreignField: "ID_Cliente",
+                        as: "cliente_info"
+                    }
+                },
+                {
+                    $unwind: "$cliente_info"
+                },
+                {
+                    $group: {
+                        _id: "$cliente_id",
+                        cliente_info: { $first: "$cliente_info" },
+                        reserva_info: {
+                            $push: {
+                                "ID": "$ID_Reserva",
+                                "Booking": "$Fecha_Reserva",
+                                "Start": "$Fecha_Inicio",
+                                "End": "$Fecha_Fin",
+                                "Status": "$Estado"
+                            }
+                        }
+                    }
+                },
+                {
+                    $project: {
+                        "_id": 0,
+                        "cliente_info": {
+                            "Document": "$cliente_info.DNI",
+                            "Name": "$cliente_info.Nombre",
+                            "Lastname": "$cliente_info.Apellido"
+                        },
+                        "reserva_info": 1,
+                    }
+                }
+            ]).toArray();
+        } catch (error) {
+            throw error;
+        }
+    }
+
 }
 export default Reserva;

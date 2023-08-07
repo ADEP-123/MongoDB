@@ -43,11 +43,11 @@ Ejercicio practico para aprendizaje de mongo, se creo una base de datos simuland
 7. La consola le mostrara la direccion http donde esta corriendo el servidor, la cual de manera predeterminada es "http://127.10.10.10:5010"
 8. Para interactuar con los enpoints es recomendable usar una extension como Thunder Client, para ello siga los siguientes pasos:
 
-- 10.1. Descarge la extension Thunder Client desde visual studio code
-- 10.2. En el panel izquierdo seleccione la extension Thunder Client y posteriormente en new request
-- 10.3. Coloque la url en el panel de direccion de Thunder Client con el endpoint especifico
-- 10.4. Seleccione el metodo de la peticion segun corresponda
-- 10.5. Si es un metodo POST envie un objeto en formato JSON con la informacion requerida en la pestaña body de Thunder Client
+- 8.1. Descarge la extension Thunder Client desde visual studio code
+- 8.2. En el panel izquierdo seleccione la extension Thunder Client y posteriormente en new request
+- 8.3. Coloque la url en el panel de direccion de Thunder Client con el endpoint especifico
+- 8.4. Seleccione el metodo de la peticion segun corresponda
+- 8.5. Si es un metodo POST envie un objeto en formato JSON con la informacion requerida en la pestaña body de Thunder Client
 
 ---
 
@@ -57,90 +57,97 @@ Ejercicio practico para aprendizaje de mongo, se creo una base de datos simuland
 
 1. Mostrar todos los clientes registrados en la base de datos.
 
-   - URL: http://127.10.10.10:5010/campus/get/cliente
-   - Método: GET
-   - Lectura de Datos:
-   - Ejemplo: http://127.10.10.10:5010/campus/get/cliente
+    - URL: http://127.10.10.10:5010/campus/get/cliente
+    - Método: GET
+    - Lectura de Datos:
+    - Ejemplo: http://127.10.10.10:5010/campus/get/cliente
 
 2. Obtener todos los automóviles disponibles para alquiler.
 
-   - URL: http://127.10.10.10:5010/campus/get/sucursal_automovil/vehicLibre
-   - Método: GET
-   - Lectura de Datos:
-   - Ejemplo: http://127.10.10.10:5010/campus/get/sucursal_automovil/vehicLibre
+    - URL: http://127.10.10.10:5010/campus/get/sucursal_automovil/vehicLibre
+    - Método: GET
+    - Lectura de Datos:
+    - Ejemplo: http://127.10.10.10:5010/campus/get/sucursal_automovil/vehicLibre
 
 3. Listar todos los alquileres activos junto con los datos de los clientes relacionados.
 
-   - URL: http://127.10.10.10:5010/campus/get/alquilerActivo
-   - Método: GET
-   - Lectura de Datos:
-   - Ejemplo: http://127.10.10.10:5010/campus/get/alquilerActivo
+    - URL: http://127.10.10.10:5010/campus/get/alquilerActivo
+    - Método: GET
+    - Lectura de Datos:
+    - Ejemplo: http://127.10.10.10:5010/campus/get/alquilerActivo
 
 4. Mostrar todas las reservas pendientes con los datos del cliente y el automóvil reservado.
 
-   - URL: http://127.10.10.10:5010/campus/get/reserva
-   - Método: GET
-   - Lectura de Datos:
-   - Ejemplo: http://127.10.10.10:5010/campus/get/reserva
+    - URL: http://127.10.10.10:5010/campus/get/reserva
+    - Método: GET
+    - Lectura de Datos:
+    - Ejemplo: http://127.10.10.10:5010/campus/get/reserva
 
 5. Obtener los detalles del alquiler con el ID_Alquiler específico.
 
-   - URL: http://127.10.10.10:5010/campus/get/alquiler
-   - Método: GET
-   - Lectura de Datos: query
-   - Ejemplo: http://127.10.10.10:5010/campus/get/alquiler?id=2
+    - URL: http://127.10.10.10:5010/campus/get/alquiler
+    - Método: GET
+    - Lectura de Datos: query
+    - Ejemplo: http://127.10.10.10:5010/campus/get/alquiler?id=2
 
 6. Listar los empleados con el cargo de "Vendedor".
 
-   - URL: http://127.10.10.10:5010/campus/get/empleado?Cargo=Vendedor
-   - Método: GET
-   - Lectura de Datos: query
-   - Ejemplo: http://127.10.10.10:5010/campus/get/empleado?Cargo=Vendedor
+    - URL: http://127.10.10.10:5010/campus/get/empleado?Cargo=Vendedor
+    - Método: GET
+    - Lectura de Datos: query
+    - Ejemplo: http://127.10.10.10:5010/campus/get/empleado?Cargo=Vendedor
 
 7. Mostrar la cantidad total de automóviles disponibles en cada sucursal.
 
-   - URL: http://127.10.10.10:5010/campus/get/vehiculosEnSucursal
-   - Método: GET
-   - Lectura de Datos:
-   - Ejemplo: http://127.10.10.10:5010/campus/get/vehiculosEnSucursal
+    - URL: http://127.10.10.10:5010/campus/get/vehiculosEnSucursal
+    - Método: GET
+    - Lectura de Datos:
+    - Ejemplo: http://127.10.10.10:5010/campus/get/vehiculosEnSucursal
 
 8. Obtener el costo total de un alquiler específico.
 
-   - URL: http://127.10.10.10:5010/campus/get/alquiler
-   - Método: GET
-   - Lectura de Datos: query
-   - Ejemplo: http://127.10.10.10:5010/campus/get/alquiler?id=1&cost=true
-   - Nota: El valor cost es un booleano que puede ser true o false, en caso de ser falso devolvera la informacion de dicho alquiler unicamente
+    - URL: http://127.10.10.10:5010/campus/get/alquiler
+    - Método: GET
+    - Lectura de Datos: query
+    - Ejemplo: http://127.10.10.10:5010/campus/get/alquiler?id=1&cost=true
+    - Nota: El valor cost es un booleano que puede ser true o false, en caso de ser falso devolvera la informacion de dicho alquiler unicamente
 
 9. Listar los clientes con el DNI específico.
 
-   - URL: http://127.10.10.10:5010/campus/get/cliente
-   - Método: GET
-   - Lectura de Datos: query
-   - Ejemplo: http://127.10.10.10:5010/campus/get/cliente?document=1098817776
+    - URL: http://127.10.10.10:5010/campus/get/cliente
+    - Método: GET
+    - Lectura de Datos: query
+    - Ejemplo: http://127.10.10.10:5010/campus/get/cliente?document=1098817776
 
 10. Mostrar todos los automóviles con una capacidad mayor a 5 personas.
 
-   - URL: http://127.10.10.10:5010/campus/get/automovil
-   - Método: GET
-   - Lectura de Datos: query
-   - Ejemplo: http://127.10.10.10:5010/campus/get/automovil?Capacidad=5
-   - Nota: debido a las necesidades estrictas de la consulta la unica capacidad que se puede ingresar es 5
+    - URL: http://127.10.10.10:5010/campus/get/automovil
+    - Método: GET
+    - Lectura de Datos: query
+    - Ejemplo: http://127.10.10.10:5010/campus/get/automovil?Capacidad=5
+    - Nota: debido a las necesidades estrictas de la consulta la unica capacidad que se puede ingresar es 5
 
 11. Obtener los detalles del alquiler que tiene fecha de inicio en '2023 07 05'.
 
-   - URL: http://127.10.10.10:5010/campus/get/alquiler
-   - Método: GET
-   - Lectura de Datos: query
-   - Ejemplo: http://127.10.10.10:5010/campus/get/alquiler?startingDate=2023-09-01
-   - Nota: debido a las necesidades estrictas de la consulta la unica fecha que se puede ingresar es 2023-09-01
+    - URL: http://127.10.10.10:5010/campus/get/alquiler
+    - Método: GET
+    - Lectura de Datos: query
+    - Ejemplo: http://127.10.10.10:5010/campus/get/alquiler?startingDate=2023-09-01
+    - Nota: debido a las necesidades estrictas de la consulta la unica fecha que se puede ingresar es 2023-09-01
+
+12. Listar las reservas pendientes realizadas por un cliente específico.
+
+    - URL: http://127.10.10.10:5010/campus/get/reserva
+    - Método: GET
+    - Lectura de Datos: query
+    - Ejemplo: http://127.10.10.10:5010/campus/get/reserva?clientId=1
 
 #.
 
-- URL: http://127.10.10.10:5010/campus/get/sucursal
-- Método: GET
-- Lectura de Datos:
-- Ejemplo: http://127.10.10.10:5010/campus/get/sucursal
+    - URL: http://127.10.10.10:5010/campus/get/sucursal
+    - Método: GET
+    - Lectura de Datos:
+    - Ejemplo: http://127.10.10.10:5010/campus/get/sucursal
 
 ---
 
