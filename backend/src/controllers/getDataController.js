@@ -1,4 +1,4 @@
-import { getAllActiveRentsAndClientsService, getAllBookinsService, getAllClientsService, getAllFreeVehiclesService, getAllSucursalService, getAllVehiclesSortedService, getBookingsByClientID, getClientByDocumentService, getClientInfoByBookingIDService, getClientsWhoRentedService, getManagerOrAssistantService, getRentBydIdService, getRentValueService, getRentsAmountService, getRentsOnDateService, getSellerService, getVehicles5PeopleAvailableService, getVehiclesMore5PeopleService, getVehiclesOnSucursalAndAddressService, getVehiclesOnSucursalService } from "../services/getServices.js";
+import { getAllActiveRentsAndClientsService, getAllBookinsService, getAllClientsService, getAllFreeVehiclesService, getAllSucursalService, getAllVehiclesSortedService, getBookingsByClientID, getClientByDocumentService, getClientInfoByBookingIDService, getClientsWhoRentedService, getManagerOrAssistantService, getRentBydIdService, getRentValueService, getRentsAmountService, getRentsBetwenDatesService, getRentsOnDateService, getSellerService, getVehicles5PeopleAvailableService, getVehiclesMore5PeopleService, getVehiclesOnSucursalAndAddressService, getVehiclesOnSucursalService } from "../services/getServices.js";
 
 const getSucursalController = async (req, res, next) => {
     if (!req.rateLimit) return;
@@ -54,15 +54,15 @@ const getAllActiveRentsAndClientsController = async (req, res, next) => {
 
 const getBookinsController = async (req, res, next) => {
     if (!req.rateLimit) return;
-    const { clientId , ID} = req.query
+    const { clientId, ID } = req.query
     try {
         let result;
         if (clientId) {
             result = await getBookingsByClientID(Number(clientId));
         } else {
-            if(ID){
+            if (ID) {
                 result = await getClientInfoByBookingIDService(Number(ID));
-            }else{
+            } else {
                 result = await getAllBookinsService();
             }
         }
@@ -74,7 +74,7 @@ const getBookinsController = async (req, res, next) => {
 
 const getRentController = async (req, res, next) => {
     if (!req.rateLimit) return;
-    const { id, cost, startingDate, amount } = req.query
+    const { id, cost, startingDate, amount, finalDate } = req.query
     try {
         let result;
         if (cost) {
@@ -88,8 +88,14 @@ const getRentController = async (req, res, next) => {
                     break;
             }
         } else {
-            if (startingDate == '2023-09-01') {
-                result = await getRentsOnDateService();
+            if (startingDate) {
+                if (startingDate == '2023-09-01') {
+                    result = await getRentsOnDateService();
+                } else {
+                    if (startingDate && finalDate) {
+                        result = await getRentsBetwenDatesService(startingDate, finalDate);
+                    }
+                }
             } else {
                 if (amount) {
                     result = await getRentsAmountService();
@@ -155,7 +161,7 @@ const getVehiclesController = async (req, res, next) => {
     try {
         let result;
         if (Capacidad == 5) {
-            if(Disponible == "true"){
+            if (Disponible == "true") {
                 result = await getVehicles5PeopleAvailableService();
             } else {
                 result = await getVehiclesMore5PeopleService();

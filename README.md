@@ -198,6 +198,14 @@ Ejercicio practico para aprendizaje de mongo, se creo una base de datos simuland
     - Ejemplo: http://127.10.10.10:5010/campus/get/reserva?ID=2
     - Nota: debe colocar en la query el parametro ID tal cual seguido del id de la reserva de la cual desea conocer la informacion del cliente como se muestra en el ejemplo
 
+20. Listar los alquileres con fecha de inicio entre '2023-07-05' y '2023-07-10'.
+
+    - URL: http://127.10.10.10:5010/campus/get/alquiler
+    - Método: GET
+    - Lectura de Datos: query
+    - Ejemplo: http://127.10.10.10:5010/campus/get/alquiler?startingDate=2023-07-24&finalDate=2023-08-06
+    - Nota: debe colocar en la query los parametros startingDate y finalDate tal cual se muestran, sus valores pueden variar segun lo deseado, en el ejemplo se indican unos valores diferentes al enunciado ya que no existen alquileres con las condiciones del enunciado
+
 #.
 
     - URL: http://127.10.10.10:5010/campus/get/sucursal

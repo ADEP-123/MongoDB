@@ -126,6 +126,12 @@ const getClientInfoByBookingIDService = async (ID) => {
     return result;
 };
 
+const getRentsBetwenDatesService = async (fechaInicio,fechaFinal) => {
+    const alquiler = new Alquiler();
+    const result = await alquiler.getRentsBetwenDates(fechaInicio,fechaFinal);
+    return result;
+};
+
 export {
     getAllSucursalService,
     getAllClientsService,
@@ -146,5 +152,6 @@ export {
     getVehiclesOnSucursalAndAddressService,
     getRentsAmountService,
     getVehicles5PeopleAvailableService,
-    getClientInfoByBookingIDService
+    getClientInfoByBookingIDService,
+    getRentsBetwenDatesService
 }

@@ -216,6 +216,37 @@ class Alquiler {
             throw error;
         }
     }
+
+    async getRentsBetwenDates(fechaInicio,fechaFinal) {
+        try {
+            const coleccion = await collectionGen("alquiler");
+            const pipeline = [
+                {
+                    $match: {
+                        Fecha_Inicio: {
+                            $gte: fechaInicio,
+                            $lte: fechaFinal
+                        }
+                    }
+                },
+                {
+                    $project: {
+                        ID: "$ID_Alquiler",
+                        Client: "$cliente_id",
+                        Vehicle: "$automovil_id",
+                        Start: "$Fecha_Inicio",
+                        End: "$Fecha_Fin",
+                        Cost: "$Costo_Total",
+                        Status: "$Estado",
+                        _id: 0
+                    }
+                }
+            ];
+            return coleccion.aggregate(pipeline).toArray();
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 export default Alquiler;
