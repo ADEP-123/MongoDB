@@ -104,6 +104,14 @@ Ejercicio practico para aprendizaje de mongo, se creo una base de datos simuland
    - Lectura de Datos: 
    - Ejemplo: http://127.10.10.10:5010/campus/get/vehiculosEnSucursal
 
+8. Obtener el costo total de un alquiler específico.
+
+   - URL: http://127.10.10.10:5010/campus/get/alquiler
+   - Método: GET
+   - Lectura de Datos: query
+   - Ejemplo: http://127.10.10.10:5010/campus/get/alquiler?id=1&cost=true
+   - Nota: El valor cost es un booleano que puede ser true o false, en caso de ser falso devolvera la informacion de dicho alquiler unicamente
+
 #.
 
 - URL: http://127.10.10.10:5010/campus/get/sucursal

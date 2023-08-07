@@ -94,6 +94,31 @@ class Alquiler {
             throw error;
         }
     }
+
+    async getRentValue(id) {
+        try {
+            const coleccion = await collectionGen("alquiler");
+            console.log("Coleccion: ", coleccion);
+
+            const pipeline = [
+                {
+                    $match: {
+                        ID_Alquiler: id
+                    }
+                },
+                {
+                    $project: {
+                        ID: "$ID_Alquiler",
+                        Costo: "$Costo_Total",
+                        _id: 0 
+                    }
+                }
+            ];
+            return coleccion.aggregate(pipeline).toArray();
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 export default Alquiler;

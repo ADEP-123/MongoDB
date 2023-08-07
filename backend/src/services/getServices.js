@@ -53,6 +53,12 @@ const getVehiclesOnSucursalService = async () => {
     return result;
 };
 
+const getRentValueService = async (id) => {
+    const alquiler = new Alquiler()
+    const result = await alquiler.getRentValue(id)
+    return result;
+};
+
 export {
     getAllSucursalService,
     getAllClientsService,
@@ -61,5 +67,6 @@ export {
     getAllBookinsService,
     getRentBydIdService,
     getSellerService,
-    getVehiclesOnSucursalService
+    getVehiclesOnSucursalService,
+    getRentValueService
 }
