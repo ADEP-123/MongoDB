@@ -78,6 +78,7 @@ db.sucursal.insertMany([
 
 
 // Coleccion automovil
+use("db_campus_alquiler");
 db.createCollection("automovil", {
     capped: true,
     size: 810,
@@ -112,7 +113,7 @@ db.createCollection("automovil", {
                     description: "Capacidad del automóvil"
                 },
                 Precio_Diario: {
-                    bsonType: "double",
+                    bsonType: "int",
                     description: "Precio diario del automóvil"
                 }
             }
@@ -121,14 +122,14 @@ db.createCollection("automovil", {
 });
 db.automovil.insertMany([
     {
-        "_id": 1,
-        "ID_Automovil": 1,
-        "Marca": "Jeep",
-        "Modelo": "Rubicoon",
-        "Anio": "2023",
-        "Tipo": "Camioneta",
-        "Capacidad": 6,
-        "Precio_Diario": 150000
+        _id: 1,
+        ID_Automovil: 1,
+        Marca: "Jeep",
+        Modelo: "Rubicoon",
+        Anio: "2023",
+        Tipo: "Camioneta",
+        Capacidad: 6,
+        Precio_Diario: 150000
     },
     {
         _id: 2,
@@ -184,6 +185,7 @@ db.automovil.insertMany([
 
 
 // Coleccion sucursal_automovil
+use("db_campus_alquiler");
 db.createCollection("sucursal_automovil", {
     capped: true,
     size: 525,
@@ -254,6 +256,7 @@ db.sucursal_automovil.insertMany([
 
 
 // Coleccion cliente
+use("db_campus_alquiler");
 db.createCollection("cliente", {
     capped: true,
     size: 1165,
@@ -360,6 +363,7 @@ db.cliente.insertMany([
 
 
 // Coleccion reserva
+use("db_campus_alquiler");
 db.createCollection("reserva", {
     capped: true,
     size: 950,
@@ -382,15 +386,18 @@ db.createCollection("reserva", {
                     description: "ID del automóvil"
                 },
                 Fecha_Reserva: {
-                    bsonType: "date",
+                    bsonType: "string",
+                    pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
                     description: "Fecha de la reserva"
                 },
                 Fecha_Inicio: {
-                    bsonType: "date",
+                    bsonType: "string",
+                    pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
                     description: "Fecha de inicio de la reserva"
                 },
                 Fecha_Fin: {
-                    bsonType: "date",
+                    bsonType: "string",
+                    pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
                     description: "Fecha de fin de la reserva"
                 },
                 Estado: {
@@ -466,6 +473,7 @@ db.reserva.insertMany([
 
 
 // Coleccion alquiler
+use("db_campus_alquiler");
 db.createCollection("alquiler", {
     capped: true,
     size: 950,
@@ -488,11 +496,13 @@ db.createCollection("alquiler", {
                     description: "ID del automóvil"
                 },
                 Fecha_Inicio: {
-                    bsonType: "date",
+                    bsonType: "string",
+                    pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
                     description: "Fecha de inicio del alquiler"
                 },
                 Fecha_Fin: {
-                    bsonType: "date",
+                    bsonType: "string",
+                    pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
                     description: "Fecha de fin del alquiler"
                 },
                 Costo_Total: {
@@ -572,6 +582,7 @@ db.alquiler.insertMany([
 
 
 // Coleccion empleado
+use("db_campus_alquiler");
 db.createCollection("empleado", {
     capped: true,
     size: 1035,
@@ -749,6 +760,7 @@ db.empleado.insertMany([
 
 
 // Coleccion registro_entrega
+use("db_campus_alquiler");
 db.createCollection("registro_entrega", {
     capped: true,
     size: 875,
@@ -771,12 +783,14 @@ db.createCollection("registro_entrega", {
                     description: "ID del empleado"
                 },
                 Fecha_Entrega: {
-                    bsonType: "date",
+                    bsonType: "string",
+                    pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
                     description: "Fecha de entrega"
                 },
                 Combustible_Entregado: {
-                    bsonType: "int",
-                    description: "Cantidad de combustible entregado"
+                    bsonType: "number",
+                    pattern: "^[0-9]{5}.[0-9]{2}$",
+                    description: "Cantidad de combustible entregado en litros"
                 },
                 Kilometraje_Entregado: {
                     bsonType: "int",
@@ -786,6 +800,7 @@ db.createCollection("registro_entrega", {
         }
     }
 });
+use("db_campus_alquiler");
 db.registro_entrega.insertMany([
     {
         _id: 1,
@@ -793,7 +808,7 @@ db.registro_entrega.insertMany([
         alquiler_id: 1,
         empleado_id: 1,
         Fecha_Entrega: "2023-07-25",
-        Combustible_Entregado: 10,
+        Combustible_Entregado: 10.01,
         Kilometraje_Entregado: 2470
     },
     {
@@ -845,6 +860,7 @@ db.registro_entrega.insertMany([
 
 
 // Coleccion registro_devolucion
+use("db_campus_alquiler");
 db.createCollection("registro_devolucion", {
     capped: true,
     size: 875,
@@ -867,11 +883,13 @@ db.createCollection("registro_devolucion", {
                     description: "ID del empleado"
                 },
                 Fecha_Devolucion: {
-                    bsonType: "date",
+                    bsonType: "string",
+                    pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
                     description: "Fecha de devolucion"
                 },
                 Combustible_Entregado: {
-                    bsonType: "int",
+                    bsonType: "number",
+                    pattern: "^[0-9]{5}.[0-9]{2}$",
                     description: "Cantidad de combustible entregado el momento de la devolucion"
                 },
                 Kilometraje_Entregado: {
