@@ -2,7 +2,35 @@ use("db_campus_alquiler");
 
 
 // Coleccion Sucursal
-db.createCollection("sucursal");
+db.createCollection("sucursal", {
+    capped: true,
+    size: 640,
+    // max: 5,
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["ID_Sucursal", "Nombre", "Direccion", "Telefono"],
+            properties: {
+                ID_Sucursal: {
+                    bsonType: "int",
+                    description: "ID de la sucursal"
+                },
+                Nombre: {
+                    bsonType: "string",
+                    description: "Nombre de la sucursal"
+                },
+                Direccion: {
+                    bsonType: "string",
+                    description: "Dirección de la sucursal"
+                },
+                Telefono: {
+                    bsonType: "int",
+                    description: "Número de teléfono de la sucursal"
+                }
+            }
+        }
+    }
+});
 db.sucursal.insertMany([
     {
         _id: 1,
@@ -50,17 +78,57 @@ db.sucursal.insertMany([
 
 
 // Coleccion automovil
-db.createCollection("automovil");
+db.createCollection("automovil", {
+    capped: true,
+    size: 810,
+    // max: 5,
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["ID_Automovil", "Marca", "Modelo", "Anio", "Tipo", "Capacidad", "Precio_Diario"],
+            properties: {
+                ID_Automovil: {
+                    bsonType: "int",
+                    description: "ID del automóvil"
+                },
+                Marca: {
+                    bsonType: "string",
+                    description: "Marca del automóvil"
+                },
+                Modelo: {
+                    bsonType: "string",
+                    description: "Modelo del automóvil"
+                },
+                Anio: {
+                    bsonType: "string",
+                    description: "Año del automóvil"
+                },
+                Tipo: {
+                    bsonType: "string",
+                    description: "Tipo del automóvil"
+                },
+                Capacidad: {
+                    bsonType: "int",
+                    description: "Capacidad del automóvil"
+                },
+                Precio_Diario: {
+                    bsonType: "double",
+                    description: "Precio diario del automóvil"
+                }
+            }
+        }
+    }
+});
 db.automovil.insertMany([
     {
-        _id: 1,
-        ID_Automovil: 1,
-        Marca: "Jeep",
-        Modelo: "Rubicoon",
-        Anio: "2023",
-        Tipo: "Camioneta",
-        Capacidad: 6,
-        Precio_Diario: 150000
+        "_id": 1,
+        "ID_Automovil": 1,
+        "Marca": "Jeep",
+        "Modelo": "Rubicoon",
+        "Anio": "2023",
+        "Tipo": "Camioneta",
+        "Capacidad": 6,
+        "Precio_Diario": 150000
     },
     {
         _id: 2,
@@ -116,7 +184,35 @@ db.automovil.insertMany([
 
 
 // Coleccion sucursal_automovil
-db.createCollection("sucursal_automovil");
+db.createCollection("sucursal_automovil", {
+    capped: true,
+    size: 525,
+    // max: 5,
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["_id", "sucursal_id", "automovil_id", "Cantidad_Disponible"],
+            properties: {
+                _id: {
+                    bsonType: "int",
+                    description: "ID de la sucursal_automovil"
+                },
+                sucursal_id: {
+                    bsonType: "int",
+                    description: "ID de la sucursal"
+                },
+                automovil_id: {
+                    bsonType: "int",
+                    description: "ID del automóvil"
+                },
+                Cantidad_Disponible: {
+                    bsonType: "int",
+                    description: "Cantidad disponible del automóvil en la sucursal"
+                }
+            }
+        }
+    }
+});
 db.sucursal_automovil.insertMany([
     {
         _id: 1,
@@ -158,7 +254,47 @@ db.sucursal_automovil.insertMany([
 
 
 // Coleccion cliente
-db.createCollection("cliente");
+db.createCollection("cliente", {
+    capped: true,
+    size: 1165,
+    // max: 5,
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["ID_Cliente", "Nombre", "Apellido", "DNI", "Direccion", "Telefono", "Email"],
+            properties: {
+                ID_Cliente: {
+                    bsonType: "int",
+                    description: "ID del cliente"
+                },
+                Nombre: {
+                    bsonType: "string",
+                    description: "Nombre del cliente"
+                },
+                Apellido: {
+                    bsonType: "string",
+                    description: "Apellido del cliente"
+                },
+                DNI: {
+                    bsonType: "string",
+                    description: "DNI del cliente"
+                },
+                Direccion: {
+                    bsonType: "string",
+                    description: "Dirección del cliente"
+                },
+                Telefono: {
+                    bsonType: "string",
+                    description: "Número de teléfono del cliente"
+                },
+                Email: {
+                    bsonType: "string",
+                    description: "Correo electrónico del cliente"
+                }
+            }
+        }
+    }
+});
 db.cliente.insertMany([
     {
         _id: 1,
@@ -224,7 +360,47 @@ db.cliente.insertMany([
 
 
 // Coleccion reserva
-db.createCollection("reserva");
+db.createCollection("reserva", {
+    capped: true,
+    size: 950,
+    // max: 5,
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["ID_Reserva", "cliente_id", "automovil_id", "Fecha_Reserva", "Fecha_Inicio", "Fecha_Fin", "Estado"],
+            properties: {
+                ID_Reserva: {
+                    bsonType: "int",
+                    description: "ID de la reserva"
+                },
+                cliente_id: {
+                    bsonType: "int",
+                    description: "ID del cliente"
+                },
+                automovil_id: {
+                    bsonType: "int",
+                    description: "ID del automóvil"
+                },
+                Fecha_Reserva: {
+                    bsonType: "date",
+                    description: "Fecha de la reserva"
+                },
+                Fecha_Inicio: {
+                    bsonType: "date",
+                    description: "Fecha de inicio de la reserva"
+                },
+                Fecha_Fin: {
+                    bsonType: "date",
+                    description: "Fecha de fin de la reserva"
+                },
+                Estado: {
+                    bsonType: "string",
+                    description: "Estado de la reserva"
+                }
+            }
+        }
+    }
+});
 db.reserva.insertMany([
     {
         _id: 1,
@@ -290,7 +466,47 @@ db.reserva.insertMany([
 
 
 // Coleccion alquiler
-db.createCollection("alquiler");
+db.createCollection("alquiler", {
+    capped: true,
+    size: 950,
+    // max: 5,
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["ID_Alquiler", "cliente_id", "automovil_id", "Fecha_Inicio", "Fecha_Fin", "Costo_Total", "Estado"],
+            properties: {
+                ID_Alquiler: {
+                    bsonType: "int",
+                    description: "ID del alquiler"
+                },
+                cliente_id: {
+                    bsonType: "int",
+                    description: "ID del cliente"
+                },
+                automovil_id: {
+                    bsonType: "int",
+                    description: "ID del automóvil"
+                },
+                Fecha_Inicio: {
+                    bsonType: "date",
+                    description: "Fecha de inicio del alquiler"
+                },
+                Fecha_Fin: {
+                    bsonType: "date",
+                    description: "Fecha de fin del alquiler"
+                },
+                Costo_Total: {
+                    bsonType: "int",
+                    description: "Cocto total del alquiler"
+                },
+                Estado: {
+                    bsonType: "string",
+                    description: "Estado del alquiler"
+                }
+            }
+        }
+    }
+});
 db.alquiler.insertMany([
     {
         _id: 1,
@@ -356,7 +572,47 @@ db.alquiler.insertMany([
 
 
 // Coleccion empleado
-db.createCollection("empleado");
+db.createCollection("empleado", {
+    capped: true,
+    size: 1035,
+    // max: 5,
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["ID_Empleado", "Nombre", "Apellido", "DNI", "Direccion", "Telefono", "Cargo"],
+            properties: {
+                ID_Empleado: {
+                    bsonType: "int",
+                    description: "ID del empleado"
+                },
+                Nombre: {
+                    bsonType: "string",
+                    description: "Nombre del empleado"
+                },
+                Apellido: {
+                    bsonType: "string",
+                    description: "Apellido del empleado"
+                },
+                DNI: {
+                    bsonType: "string",
+                    description: "DNI del empleado"
+                },
+                Direccion: {
+                    bsonType: "string",
+                    description: "Dirección del empleado"
+                },
+                Telefono: {
+                    bsonType: "string",
+                    description: "Número de teléfono del empleado"
+                },
+                Cargo: {
+                    bsonType: "string",
+                    description: "Cargo del empleado"
+                }
+            }
+        }
+    }
+});
 db.empleado.insertMany([
     {
         _id: 1,
@@ -493,7 +749,43 @@ db.empleado.insertMany([
 
 
 // Coleccion registro_entrega
-db.createCollection("registro_entrega");
+db.createCollection("registro_entrega", {
+    capped: true,
+    size: 875,
+    // max: 5,
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["ID_Registro", "alquiler_id", "empleado_id", "Fecha_Entrega", "Combustible_Entregado", "Kilometraje_Entregado"],
+            properties: {
+                ID_Registro: {
+                    bsonType: "int",
+                    description: "ID del registro de entrega"
+                },
+                alquiler_id: {
+                    bsonType: "int",
+                    description: "ID del alquiler"
+                },
+                empleado_id: {
+                    bsonType: "int",
+                    description: "ID del empleado"
+                },
+                Fecha_Entrega: {
+                    bsonType: "date",
+                    description: "Fecha de entrega"
+                },
+                Combustible_Entregado: {
+                    bsonType: "int",
+                    description: "Cantidad de combustible entregado"
+                },
+                Kilometraje_Entregado: {
+                    bsonType: "int",
+                    description: "Kilometraje registrado en la entrega"
+                }
+            }
+        }
+    }
+});
 db.registro_entrega.insertMany([
     {
         _id: 1,
@@ -553,7 +845,47 @@ db.registro_entrega.insertMany([
 
 
 // Coleccion registro_devolucion
-db.createCollection("registro_devolucion");
+db.createCollection("registro_devolucion", {
+    capped: true,
+    size: 875,
+    // max: 5,
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["ID_Registro", "alquiler_id", "empleado_id", "Fecha_Devolucion", "Combustible_Devuelto", "Kilometraje_Entregado", "Monto_Adicional"],
+            properties: {
+                ID_Registro: {
+                    bsonType: "int",
+                    description: "ID del registro de devolucion"
+                },
+                alquiler_id: {
+                    bsonType: "int",
+                    description: "ID del alquiler"
+                },
+                empleado_id: {
+                    bsonType: "int",
+                    description: "ID del empleado"
+                },
+                Fecha_Devolucion: {
+                    bsonType: "date",
+                    description: "Fecha de devolucion"
+                },
+                Combustible_Entregado: {
+                    bsonType: "int",
+                    description: "Cantidad de combustible entregado el momento de la devolucion"
+                },
+                Kilometraje_Entregado: {
+                    bsonType: "int",
+                    description: "Kilometraje registrado en la devolucion"
+                },
+                Monto_Adicional: {
+                    bsonType: "int",
+                    description: "Monto adicional del registrado de devolucion"
+                }
+            }
+        }
+    }
+});
 db.registro_devolucion.insertMany([
     {
         _id: 1,
