@@ -16,7 +16,7 @@ class Sucursal {
     async getAllSucursal() {
         try {
             const coleccion = await collectionGen("sucursal");
-            console.log(coleccion);
+
             return coleccion.find().toArray();
         } catch (error) {
             throw error;
@@ -26,7 +26,6 @@ class Sucursal {
     async getVehiclesOnSucursal() {
         try {
             const coleccion = await collectionGen("sucursal");
-            console.log(coleccion);
             return coleccion.aggregate([
                 {
                     $lookup: {
@@ -64,7 +63,6 @@ class Sucursal {
     async getVehiclesOnSucursalAndAddress() {
         try {
             const coleccion = await collectionGen("sucursal");
-            console.log(coleccion);
             return coleccion.aggregate([
                 {
                     $lookup: {
