@@ -6,6 +6,7 @@ import { SignJWT } from 'jose';
 import { AlquilerDTO } from '../routes/dto/js/alquilerDTO.js';
 import { EmpleadoDTO } from '../routes/dto/js/empleadoDTO.js';
 import { ClienteDTO } from '../routes/dto/js/clientDTO.js';
+import { AutomovilDTO } from '../routes/dto/js/automovilDTO.js';
 
 
 dotenv.config();
