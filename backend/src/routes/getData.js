@@ -1,12 +1,12 @@
 import { Router } from "express";
 import { getAllActiveRentsAndClientsController, getAllFreeVehiclesController, getBookinsController, getClientsController, getEmployeController, getRentController, getSucursalController, getVehiclesController, getVehiclesOnSucursalController } from "../controllers/getDataController.js";
 import { middlewareContentLength } from "../middleware/contentLength.js";
-import { contentMiddlewareAlquiler, contentMiddlewareEmpleado } from "../middleware/contentMiddleware.js";
+import { contentMiddlewareAlquiler, contentMiddlewareCliente, contentMiddlewareEmpleado } from "../middleware/contentMiddleware.js";
 
 const getInitRoute = () => {
     const router = Router()
     router.get("/sucursal", middlewareContentLength, getSucursalController);
-    router.get("/cliente", middlewareContentLength, getClientsController);
+    router.get("/cliente", middlewareContentLength, contentMiddlewareCliente, getClientsController);
     router.get("/sucursal_automovil/vehicLibre", middlewareContentLength, getAllFreeVehiclesController);
     router.get("/alquilerActivo", middlewareContentLength, getAllActiveRentsAndClientsController);
     router.get("/reserva", middlewareContentLength, getBookinsController);
