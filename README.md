@@ -63,6 +63,7 @@ Ejercicio practico para aprendizaje de mongo, se creo una base de datos simuland
   - EmpleadoDTO
   - ClienteDTO
   - AutomovilDTO
+  - ReservaDTO
 - Ej: http://127.10.10.10:5010/campus/login/AlquilerDTO
 
 2. Copie el token que sera devuelto como mensaje y envielo dentro del header Authorization, aun si no necesita enviar ningun tipo de informacion en el query debe tener un token de autorizacion por lo cual debe generarlo si o si, de lo contrario no le sera permitido hacer la peticion
