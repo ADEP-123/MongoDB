@@ -21,7 +21,7 @@ class Alquiler {
     async getRentBydId(id) {
         try {
             const coleccion = await collectionGen("alquiler");
-            console.log("Coleccion: ", coleccion);
+            // console.log("Coleccion: ", coleccion);
 
             const pipeline = [
                 {

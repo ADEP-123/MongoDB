@@ -75,10 +75,11 @@ const getBookinsController = async (req, res, next) => {
 const getRentController = async (req, res, next) => {
     if (!req.rateLimit) return;
     const { id, cost, startingDate, amount, finalDate } = req.query
+    console.log(req.query);
     try {
         let result;
         if (cost) {
-            switch (cost) {
+            switch (cost.toLowerCase()) {
                 case "true":
                     result = await getRentValueService(Number(id))
                     break;
@@ -97,7 +98,7 @@ const getRentController = async (req, res, next) => {
                     }
                 }
             } else {
-                if (amount) {
+                if (amount && amount.toLowerCase() == "true") {
                     result = await getRentsAmountService();
                 } else {
                     result = await getRentBydIdService(Number(id));
@@ -111,7 +112,7 @@ const getRentController = async (req, res, next) => {
         }
 
     } catch (error) {
-        res.status(500).json(error);
+        res.status(500).json(error.message);
     }
 };
 
