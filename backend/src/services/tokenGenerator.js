@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import { Router } from 'express';
 import { SignJWT } from 'jose';
 import { AlquilerDTO } from '../routes/dto/js/alquilerDTO.js';
+import { EmpleadoDTO } from '../routes/dto/js/empleadoDTO.js';
 
 
 dotenv.config();
