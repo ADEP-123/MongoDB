@@ -60,9 +60,10 @@ Ejercicio practico para aprendizaje de mongo, se creo una base de datos simuland
 - UrlDefault: http://127.10.10.10:5010/campus/login/:Coleccion
 - Descripcion: Debe cambiar el campo `:Coleccion` de la url por cualquiera de los siguientes segun lo requiera:
   - AlquilerDTO
+  - EmpleadoDTO
 - Ej: http://127.10.10.10:5010/campus/login/AlquilerDTO
 
-2. Compie el token que sera devuelto como mensaje y envielo dentro del header Authorization
+2. Copie el token que sera devuelto como mensaje y envielo dentro del header Authorization, aun si no necesita enviar ningun tipo de informacion en el query debe tener un token de autorizacion por lo cual debe generarlo si o si, de lo contrario no le sera permitido hacer la peticion
 
 Ahora si podra interactuar con las consultas de la siguiente manera: 
 
